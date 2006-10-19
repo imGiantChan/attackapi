@@ -1,0 +1,79 @@
+<project name="AttackAPI" default="all" basedir=".">
+	<property name="lib" location="lib"/>
+	<property name="demos" location="demos"/>
+	<property name="inf" location="inf"/>
+	<property name="build" location="build"/>
+	
+	<target name="_init">
+		<mkdir dir="${build}"/>
+	</target>
+	
+	<target name="_standalone" depends="_init">
+		<mkdir dir="${build}/standalone"/>
+	</target>
+	
+	<target name="standalone-AttackAPI" depends="_standalone">
+		<concat destfile="${build}/standalone/AttackAPI.js">
+			<fileset file="${lib}/AttackAPI/AttackAPI.js"/>
+			<fileset dir="${lib}/AttackAPI">
+				<exclude name="AttackAPI.js"/>
+				<exclude name="Signatures.js"/>
+			</fileset>
+			<fileset file="${lib}/AttackAPI/Signatures.js"/>
+		</concat>
+	</target>
+	
+	<target name="standalone-MasterAPI" depends="_standalone">
+		<concat destfile="${build}/standalone/MasterAPI.js">
+			<fileset file="${lib}/MasterAPI/MasterAPI.js"/>
+			<fileset dir="${lib}/MasterAPI">
+				<exclude name="MasterAPI.js"/>
+			</fileset>
+		</concat>
+	</target>
+	
+	<target name="standalone-ZombieAPI" depends="_standalone">
+		<concat destfile="${build}/standalone/ZombieAPI.js">
+			<fileset file="${lib}/ZombieAPI/ZombieAPI.js"/>
+			<fileset dir="${lib}/ZombieAPI">
+				<exclude name="ZombieAPI.js"/>
+			</fileset>
+		</concat>
+	</target>
+	
+	<target name="standalone-lib" depends="standalone-AttackAPI, standalone-MasterAPI, standalone-ZombieAPI"/>
+	
+	<target name="lib" depends="_init">
+		<copy todir="${build}/lib">
+			<fileset dir="${lib}"/>
+		</copy>
+	</target>
+	
+	<target name="demos" depends="lib, inf">
+		<copy todir="${build}/demos">
+			<fileset dir="${demos}"/>
+		</copy>
+	</target>
+	
+	<target name="inf" depends="_init">
+		<copy todir="${build}/inf">
+			<fileset dir="${inf}"/>
+		</copy>
+	</target>
+	
+	<target name="docs" depends="_init">
+		<copy todir="${build}">
+			<fileset file="COPYING"/>
+		</copy>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+	
+	<target name="package" depends="all">
+		<zip destfile="${build}/AttackAPI.zip" basedir="${build}"/>
+	</target>
+	
+	<target name="all" depends="standalone-lib, lib, demos, inf, docs"/>
+</project>
