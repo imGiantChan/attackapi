@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+		<link rel="stylesheet" href="styles/screen.css" type="text/css"/>
+		<script src="scripts/jquery.js" type="text/javascript"></script>
+		<script src="scripts/init.js" type="text/javascript"></script>
+		<title>title</title>
+	</head>
+	<body>
+		<h1 id="header">title</h1>
+		<ul id="navigation"></ul>
+		
+		<div class="message">Simple scan works only when the same origin checks are successfully passed. scriptScan is more generic and it should work in most cases. It must be noted that scriptScan depands on timeouts. Change the timeout value accordingly.</div>
+		<form>
+			<label for="timeout">timeout</label><br/>
+			<input name="timeout" value="1000" type="text" size="50"/><br/>
+			<label for="URLs">URLs</label><br/>
+			<textarea name="URLs" cols="50" rows="10">http://www.google.com
+http://mail.google.com
+http://www.yahoo.com
+http://www.gnucitizen.org
+http://www.securityfocus.com
+http://www.nba.com</textarea><br/>
+			<label for="result">result</label><br/>
+			<textarea name="result" cols="50" rows="10"></textarea><br/>
+			<input name="scan" value="Scan" type="button"/>
+			<input name="scriptScan" value="Script Scan" type="button"/>
+			<input name="reset" value="Reset" type="button"/>
+		</form>
+		
+		<script src="../lib/AttackAPI/AttackAPI.js" type="text/javascript"></script>
+		<script src="../lib/AttackAPI/RequestBuilder.js" type="text/javascript"></script>
+		<script src="../lib/AttackAPI/URLScanner.js" type="text/javascript"></script>
+		<script type="text/javascript">			
+			$('input[@name="scan"]').click(function () {
+				var form = $(this).parent().get(0);
+				var URLs = form.URLs.value.split("\n");
+				AttackAPI.URLScanner.scan(function (URL, status) {
+					form.result.value += URL + ' ' + status + "\n";
+				}, URLs, form.timeout.value);
+			});
+			
+			$('input[@name="scriptScan"]').click(function () {
+				var form = $(this).parent().get(0);
+				var URLs = form.URLs.value.split("\n");
+				AttackAPI.URLScanner.scriptScan(function (URL, status) {
+					form.result.value += URL + ' ' + status + "\n";
+				}, URLs, form.timeout.value);
+			});
+			
+			$('input[@name="reset"]').click(function () {
+				$(this).parent().get(0).result.value = '';
+			});
+		</script>
+		
+		<p id="footer"><a href="http://www.gnucitizen.org">GNUCITIZEN</a> &copy; 2006 all rights reserved</p>
+	</body>
+</html>

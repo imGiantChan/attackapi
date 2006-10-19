@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+		<link rel="stylesheet" href="styles/screen.css" type="text/css"/>
+		<script src="scripts/jquery.js" type="text/javascript"></script>
+		<script src="scripts/init.js" type="text/javascript"></script>
+		<title>title</title>
+	</head>
+	<body>
+		<h1 id="header">title</h1>
+		<ul id="navigation"></ul>
+		
+		<div class="message">Search with Google AJAX Search API.</div>
+		<form>
+			<label for="query">query</label><br/>
+			<input name="query" value="gnucitizen" type="text" size="50"/><br/>
+			<label for="result">result</label><br/>
+			<textarea name="result" cols="50" rows="10"></textarea><br/>
+			<input name="search" value="Search" type="button"/>
+			<input name="reset" value="Reset" type="button"/>
+		</form>
+		
+		<script src="../lib/AttackAPI/AttackAPI.js" type="text/javascript"></script>
+		<script src="../lib/AttackAPI/GoogleSearch.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$('input[@name="search"]').click(function () {
+				var form = $(this).parent().get(0);
+				AttackAPI.GoogleSearch.search(function (results, query, key, context, status) {
+					for (var index = 0; index < results.results.length ; index++) {
+						form.result.value += results.results[index].url + "\n";
+					}
+				}, form.query.value);
+			});
+			
+			$('input[@name="reset"]').click(function () {
+				$(this).parent().get(0).result.value = '';
+			});
+		</script>
+		
+		<p id="footer"><a href="http://www.gnucitizen.org">GNUCITIZEN</a> &copy; 2006 all rights reserved</p>
+	</body>
+</html>
