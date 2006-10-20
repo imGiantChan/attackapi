@@ -1,6 +1,6 @@
 <?php
 #
-# VERSION: 1.0a
+# VERSION: 1.1a
 # AUTHOR: Petko Petkov | pdp (architect)
 # HOMEPAGE: http://www.gnucitizen.org
 #
@@ -143,7 +143,7 @@ function export_to_json($php_val) {
 
 		return $tmp.']';
 	} else
-		return "'".stripslashes($php_val)."'";
+		return "'".str_replace("'", "\'", stripslashes($php_val))."'";
 }
 
 #
@@ -234,9 +234,9 @@ function action_view() {
 	session_decode(file_get_contents($path));
 
 	if (isset($_GET['callback']))
-		echo $_GET['callback'].'('.export_to_json($_SESSION).');';
+		echo $_GET['callback'].'('.export_to_json($_GET['client']).', '.export_to_json($_SESSION).');';
 	else
-		echo 'view('.export_to_json($_SESSION).');';
+		echo 'view('.export_to_json($_GET['client']).', '.export_to_json($_SESSION).');';
 
 	$_SESSION = $current_session;
 }

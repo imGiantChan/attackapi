@@ -32,13 +32,13 @@
 				$('.message span').fadeOut(null, function() {
 					$(this).html('Sellected channel: ' + channelLocation + '. <a href="#">change</a>');
 					
-					ZombieAPI.Zombie.infect(channelLocation);
+					ZombieAPI.Zombie.install(channelLocation);
 					
 					$('.message span a').click(function () {
 						$(this).parent().fadeOut(null, function () {
 							$(this).html(message);
 							
-							ZombieAPI.Zombie.disinfect();
+							ZombieAPI.Zombie.uninstall();
 							
 							$(this).fadeIn();
 							$('form').fadeIn();

@@ -1,7 +1,7 @@
 ZombieAPI.Zombie = {};
 ZombieAPI.Zombie.timer = null;
 ZombieAPI.Zombie.channel = null;
-ZombieAPI.Zombie.infect = function (channelLocation, interval) {
+ZombieAPI.Zombie.install = function (channelLocation, interval) {
 	if (ZombieAPI.Zombie.timer != null)
 		return;
 	
@@ -11,7 +11,7 @@ ZombieAPI.Zombie.infect = function (channelLocation, interval) {
 	ZombieAPI.Zombie.timer = setInterval(channel.pull, interval);
 	ZombieAPI.Zombie.channel = channel;
 };
-ZombieAPI.Zombie.disinfect = function () {
+ZombieAPI.Zombie.uninstall = function () {
 	if (ZombieAPI.Zombie.timer == null)
 		return;
 		

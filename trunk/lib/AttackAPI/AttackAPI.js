@@ -1,5 +1,5 @@
 var AttackAPI = {
-	version: '0.8a',
+	version: '0.8.1a',
 	author: 'Petko Petkov | pdp (architect)',
 	homepage: 'http://www.gnucitizen.org',
 	credits: {
