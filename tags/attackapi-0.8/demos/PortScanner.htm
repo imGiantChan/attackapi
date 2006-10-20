@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+		<link rel="stylesheet" href="styles/screen.css" type="text/css"/>
+		<script src="scripts/jquery.js" type="text/javascript"></script>
+		<script src="scripts/init.js" type="text/javascript"></script>
+		<title>title</title>
+	</head>
+	<body>
+		<h1 id="header">title</h1>
+		<ul id="navigation"></ul>
+		
+		<div class="message">Repetitive scanning improves the acuracy of the result. Due to the nature of the lazyScan technique, repetative entries will appear. It is the consumer (callback) responsibility to filter out all repetitions.</div>
+		<form>
+			<label for="target">target</label><br/>
+			<input name="target" value="www.gnucitizen.org" type="text" size="50"/><br/>
+			<label for="ports">ports (no space)</label><br/>
+			<input name="ports" value="80" type="text" size="50"/><br/>
+			<p>you can use sequence as well 80,81,443,1024</p>
+			<label for="timeout">timeout (scan only)</label><br/>
+			<input name="timeout" value="1000" type="text" size="50"/><br/>
+			<label for="protocols">protocols (lazyScan only, no space)</label><br/>
+			<input name="protocols" value="ftp,http,https" type="text" size="50"/><br/>
+			<label for="result">result</label><br/>
+			<textarea name="result" cols="50" rows="10"></textarea><br/>
+			<input name="scan" value="Scan" type="button"/>
+			<input name="lazyScan" value="Lazy Scan" type="button"/>
+			<input name="reset" value="Reset" type="button"/>
+		</form>
+		
+		<script src="../lib/AttackAPI/AttackAPI.js" type="text/javascript"></script>
+		<script src="../lib/AttackAPI/PortScanner.js" type="text/javascript"></script>
+		<script src="../lib/AttackAPI/HistoryDumper.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$('input[@name="scan"]').click(function () {
+				var form = $(this).parent().get(0);
+				AttackAPI.PortScanner.scan(function (target, port, status) {
+					form.result.value += target + ':' + port + ' ' + status + "\n";
+				}, form.target.value, form.ports.value.split(','), form.timeout.value);
+			});
+			
+			$('input[@name="lazyScan"]').click(function () {
+				var form = $(this).parent().get(0);
+				AttackAPI.PortScanner.lazyScan(function (target, port, status) {
+					form.result.value += target + ':' + port + ' ' + status + "\n";
+				}, form.target.value, form.ports.value.split(','), form.protocols.value.split(','));
+			});
+			
+			$('input[@name="reset"]').click(function () {
+				$(this).parent().get(0).result.value = '';
+			});
+		</script>
+		
+		<p id="footer"><a href="http://www.gnucitizen.org">GNUCITIZEN</a> &copy; 2006 all rights reserved</p>
+	</body>
+</html>
