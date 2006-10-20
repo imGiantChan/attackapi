@@ -56,7 +56,7 @@ MasterAPI.Shell.createJavaScriptShell = function (console) {
 	
 	this.oninput = function (input) {
 		try {
-			with (self.scope) with (self.scope.__builtins__) {
+			with (self.scope) with (self.scope.__builtins__) with (self.scope.__globals__) {
 				var obj = self.scope.eval(input + ';');
 				if (obj)
 					self.scope.__builtins__.print(obj);
