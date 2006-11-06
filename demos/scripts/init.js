@@ -16,7 +16,7 @@ var demos = [
 	'Base64Encoder',
 	'GoogleSearch',
 	'KeyLogger',
-	'CookieJar',
+	'CookieManager',
 	'Zombie',
 	'ZombieMaster'];
 
