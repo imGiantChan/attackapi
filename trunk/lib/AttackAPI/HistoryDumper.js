@@ -4,8 +4,12 @@ AttackAPI.HistoryDumper.lazyDump = function (callback, links) {
 	iframe.style.visibility = 'hidden';
 	document.body.appendChild(iframe);
 	
-	var doc = iframe.contentDocument;
-	if (doc == undefined) doc = iframe.contentWindow.document;
+	if (iframe.contentDocument)
+		var doc = iframe.contentDocument; 
+	else if (iframe.contentWindow)
+		var doc = iframe.contentWindow.document.body.innerHTML;
+	else
+		var doc = iframe.document;
 		
 	doc.open();
 	doc.write('<style>a:visited{display: none}</style>');

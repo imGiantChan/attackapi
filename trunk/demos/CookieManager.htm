@@ -11,7 +11,7 @@
 		<h1 id="header">title</h1>
 		<ul id="navigation"></ul>
 		
-		<div class="message">The CookieJar provides simple interface for managing cookies.</div>
+		<div class="message">The CookieManager provides simple interface for managing cookies.</div>
 		<form>
 			<label for="cookies">cookies</label><br/>
 			<select name="cookies"></select><br/>
@@ -28,7 +28,7 @@
 		<script type="text/javascript">		
 			function displayCookies() {
 				var selectCookie = $('select[@name="cookies"]').get(0);
-				var cookies = AttackAPI.CookieJar.listCookies();
+				var cookies = AttackAPI.CookieManager.listCookies();
 				
 				selectCookie.innerHTML = '';
 				
@@ -42,7 +42,7 @@
 				if (!form.name.value || !form.value.value)
 					return;
 					
-				AttackAPI.CookieJar.setCookie(form.name.value, form.value.value);
+				AttackAPI.CookieManager.setCookie(form.name.value, form.value.value);
 				displayCookies();
 				
 				form.name.value = '';
@@ -55,7 +55,7 @@
 				if (!form.cookies.value)
 					return;
 				
-				AttackAPI.CookieJar.delCookie(form.cookies.value);
+				AttackAPI.CookieManager.delCookie(form.cookies.value);
 				displayCookies();
 				
 				form.name.value = '';
@@ -64,7 +64,7 @@
 			
 			$('select[@name="cookies"]').change(function () {
 				$('input[@name="name"]').val($(this).val());
-				$('input[@name="value"]').val(AttackAPI.CookieJar.getCookie($(this).val()));
+				$('input[@name="value"]').val(AttackAPI.CookieManager.getCookie($(this).val()));
 			});
 			
 			displayCookies();

@@ -1,6 +1,6 @@
 AttackAPI.AuthorizationForcer = {};
 AttackAPI.AuthorizationForcer.lazyForce = function (callback, target, credentials) {
-	var links = [];
+	var links = new Array();
 	var protocol = target.substring(0, target.indexOf(':'));
 	var url = target.substring(target.indexOf(':') + 3);
 	
