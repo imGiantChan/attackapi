@@ -1,0 +1,69 @@
+<project name="AttackAPI" default="all" basedir=".">
+	<property name="build" location="build/build"/>
+	<property name="lib" location="${build}/lib"/>
+	<property name="inf" location="${build}/inf"/>
+	<property name="standalone" location="${build}"/>
+	
+	<target name="init">
+		<mkdir dir="${build}"/>
+		<copy todir="${build}">
+			<fileset file="README"/>
+			<fileset file="COPYING"/>
+		</copy>
+	</target>
+	
+	<target name="lib" depends="init">
+		<mkdir dir="${lib}"/>
+		<copy todir="${lib}/">
+			<fileset dir="lib/"/>
+		</copy>
+		<delete file="${lib}/.prefix.js"/>
+		<delete file="${lib}/.suffix.js"/>
+	</target>
+	
+	<target name="standalone" depends="init">
+		<mkdir dir="${standalone}"/>
+		<concat destfile="${standalone}/AttackAPI-standalone.js">
+			<fileset file="lib/.prefix.js"/>
+			<fileset file="lib/AttackAPI.js"/>
+			<fileset file="lib/core/core.js"/>
+			<fileset dir="lib/core/">
+				<exclude name="core.js"/>
+				<include name="*.js"/>
+			</fileset>
+			<fileset file="lib/utils/utils.js"/>
+			<fileset dir="lib/utils/">
+				<exclude name="utils.js"/>
+				<include name="*.js"/>
+			</fileset>
+			<fileset file="lib/dom/dom.js"/>
+			<fileset dir="lib/dom/">
+				<exclude name="dom.js"/>
+				<exclude name="signatures.js"/>
+				<include name="*.js"/>
+			</fileset>
+			<fileset file="lib/dom/signatures.js"/>
+			<fileset file="lib/.suffix.js"/>
+		</concat>
+	</target>
+	
+	<target name="inf" depends="init">
+		<copy todir="${inf}">
+			<fileset dir="inf"/>
+		</copy>
+	</target>
+	
+	<target name="all" depends="standalone, lib, inf"/>
+	
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+	
+	<target name="package" depends="clean, all">
+		<zip destfile="AttackAPI.zip" basedir="${build}"/>
+	</target>
+	
+	<target name="src-package" depends="clean">
+		<zip destfile="AttackAPI-src.zip" basedir="."/>
+	</target>
+</project>
