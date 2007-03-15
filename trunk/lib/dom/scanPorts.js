@@ -1,7 +1,7 @@
 
 AttackAPI.dom.scanPorts = function (scan) {
 	var ports = (scan.ports != undefined)?scan.ports:AttackAPI.dom.signatures.ports;
-	var timeout = (scan.timeout != undefined)?scan.timeout:1000;
+	var timeout = (scan.timeout != undefined)?scan.timeout:900;
 	
 	function check(port, index, length) {
 		var img = new Image();
