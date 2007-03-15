@@ -15,5 +15,5 @@ AttackAPI.utils.net2range = function (net) {
 	} else
 		start = stop = 0;
 	
-	return {start: start, stop: stop, length: stop - start};
+	return {start: start, stop: stop};
 };
