@@ -11,7 +11,7 @@ AttackAPI.dom.searchGoogle = function (request) {
 		request.onresults.apply(request, arguments);
 	};
 	
-	AttackAPI.dom.requestJSL('http://www.google.com/uds/GwebSearch?' + AttackAPI.buildQuery({
+	AttackAPI.dom.requestJSL('http://www.google.com/uds/GwebSearch?' + AttackAPI.dom.buildQuery({
 		callback: 'AttackAPI.dom.searchGoogle.callbacks.callback' + AttackAPI.dom.searchGoogle.callbacks.length,
 		context: (request.context != undefined)?request.context:0,
 		key: (request.key != undefined)?request.key:'internal-documentation',

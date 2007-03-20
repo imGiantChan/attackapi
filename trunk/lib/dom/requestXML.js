@@ -1,6 +1,5 @@
 
 AttackAPI.dom.requestXML = function (request) {
-	var tmr = null;
 	var xhr = AttackAPI.dom.getXHR();
 	
 	if (!xhr) {
@@ -9,6 +8,13 @@ AttackAPI.dom.requestXML = function (request) {
 			
 		return;
 	}
+	
+	var tmr = window.setTimeout(function () {
+		xhr.abort();
+		
+		if (typeof(request.ontimeout) == 'function')
+			request.ontimeout(request);
+	}, request.timeout?request.timeout:10000);
 	
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4) {
@@ -20,24 +26,20 @@ AttackAPI.dom.requestXML = function (request) {
 	};
 	
 	try {
-		xhr.open(request.method?request.method:'GET', request.url);
+		var method = request.method?request.method:'GET';
+		var url = request.url + (method == 'GET' && request.query?'?' + AttackAPI.utils.buildQuery(request.query):'');
+		
+		xhr.open(method, url);
 		
 		if (request.headers)
 			for (var header in request.headers)
 				xhr.setRequestHeader(header, request.headers[header]);
 				
-		xhr.send(request.body?request.body:(request.query?AttackAPI.query(request.query):null));
+		xhr.send(request.body?request.body:(method != 'GET' && request.query?AttackAPI.utils.buildQuery(request.query):null));
 	} catch (e) {
 		if (typeof(request.onerror) == 'function')
 			request.onerror(e, request);
 			
 		return;
 	}
-	
-	tmr = window.setTimeout(function () {
-		xhr.abort();
-		
-		if (typeof(request.ontimeout) == 'function')
-			request.ontimeout(request);
-	}, request.timeout?request.timeout:1000);
 };

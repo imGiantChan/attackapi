@@ -8,7 +8,7 @@ AttackAPI.dom.requestCSRF = function (request) {
 	
 	document.body.appendChild(ifr);
 	
-	var doc = AttackAPI.getDocument(ifr);
+	var doc = AttackAPI.dom.getDocument(ifr);
 	
 	var form = document.createElement('form');
 	form.setAttribute('method', request.method?request.method:'GET');
