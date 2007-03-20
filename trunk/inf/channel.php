@@ -1,6 +1,6 @@
 <?php
 #
-# VERSION: 2.0.1a
+# VERSION: 2.2.0a
 # AUTHOR: Petko Petkov | pdp (architect)
 # HOMEPAGE: http://www.gnucitizen.org
 #
@@ -94,7 +94,7 @@ if (!isset($_SESSION['client_address']))
 	$_SESSION['client_address'] = $_SERVER['REMOTE_ADDR'];
 
 #
-# INITIALIZE THE CLIENT QUEUE
+# INITIALIZE THE MESSAGE QUEUE
 #
 
 if (!isset($_SESSION['message_queue']) || !is_array($_SESSION['message_queue']))
@@ -110,7 +110,7 @@ if (isset($REFERRER) && !isset($_SESSION['message_queue'][$REFERRER]))
 if (isset($PARAMS['action']) && function_exists('action_'.$PARAMS['action']))
 	echo call_user_func('action_'.$PARAMS['action']);
 else
-	echo action_init();
+	echo action_pull();
 
 #
 # FINISH
