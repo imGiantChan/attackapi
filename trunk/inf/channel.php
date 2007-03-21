@@ -25,9 +25,11 @@ $REFERRER = null;
 # UNIFY PARAMETERS
 #
 
-$PARAMS = $_GET;
+foreach ($_GET as $key => $val)
+	$PARAMS[trim($key)] = $val;
+
 foreach ($_POST as $key => $val)
-	$PARAMS[$key] = $val;
+	$PARAMS[trim($key)] = $val;
 
 #
 # RETRIEVE THE REFERRER
@@ -87,21 +89,21 @@ session_start();
 # GET CLIENT DETAILS
 #
 
-if (!isset($_SESSION['client_agent']))
-	$_SESSION['client_agent'] = $_SERVER['HTTP_USER_AGENT'];
+if (!isset($_SESSION['_client_agent']))
+	$_SESSION['_client_agent'] = $_SERVER['HTTP_USER_AGENT'];
 
-if (!isset($_SESSION['client_address']))
-	$_SESSION['client_address'] = $_SERVER['REMOTE_ADDR'];
+if (!isset($_SESSION['_client_ip']))
+	$_SESSION['_client_ip'] = $_SERVER['REMOTE_ADDR'];
 
 #
 # INITIALIZE THE MESSAGE QUEUE
 #
 
-if (!isset($_SESSION['message_queue']) || !is_array($_SESSION['message_queue']))
-	$_SESSION['message_queue'] = array();
+if (!isset($_SESSION['_message_queue']) || !is_array($_SESSION['_message_queue']))
+	$_SESSION['_message_queue'] = array();
 
-if (isset($REFERRER) && !isset($_SESSION['message_queue'][$REFERRER]))
-	$_SESSION['message_queue'][$REFERRER] = array();
+if (isset($REFERRER) && !isset($_SESSION['_message_queue'][$REFERRER]))
+	$_SESSION['_message_queue'][$REFERRER] = array();
 
 #
 # DISPATCH
@@ -196,9 +198,9 @@ function action_push() {
 			session_decode($BACKEND->read($session_id));
 
 			if (isset($REFERRER))
-				$_SESSION['message_queue'][$REFERRER][] = $PARAMS['message'];
+				$_SESSION['_message_queue'][$REFERRER][] = $PARAMS['message'];
 			else
-				$_SESSION['message_queue']['_'][] = $PARAMS['message'];
+				$_SESSION['_message_queue']['_'][] = $PARAMS['message'];
 
 			$BACKEND->write($session_id, session_encode());
 		}
@@ -219,9 +221,9 @@ function action_push() {
 		session_decode($BACKEND->read($client));
 
 		if (isset($REFERRER))
-			$_SESSION['message_queue'][$REFERRER][] = $PARAMS['message'];
+			$_SESSION['_message_queue'][$REFERRER][] = $PARAMS['message'];
 		else
-			$_SESSION['message_queue']['_'][] = $PARAMS['message'];
+			$_SESSION['_message_queue']['_'][] = $PARAMS['message'];
 
 		$BACKEND->write($client, session_encode());
 	}
@@ -235,11 +237,11 @@ function action_pull() {
 
 	$php_val = '';
 
-	if (isset($REFERRER) && sizeof($_SESSION['message_queue'][$REFERRER]) > 0)
-		$php_val = array_shift($_SESSION['message_queue'][$REFERRER]);
+	if (isset($REFERRER) && sizeof($_SESSION['_message_queue'][$REFERRER]) > 0)
+		$php_val = array_shift($_SESSION['_message_queue'][$REFERRER]);
 	else
-		if (sizeof($_SESSION['message_queue']['_']) > 0)
-			$php_val = array_shift($_SESSION['message_queue']['_']);
+		if (sizeof($_SESSION['_message_queue']['_']) > 0)
+			$php_val = array_shift($_SESSION['_message_queue']['_']);
 
 	if (isset($PARAMS['callback']))
 		return $PARAMS['callback'].'('.export_to_json($php_val).');';
@@ -331,6 +333,9 @@ function action_save() {
 	global $BACKEND;
 
 	if (!isset($PARAMS['name']) || !isset($PARAMS['value']))
+		return;
+
+	if ($PARAMS['name']{0} == '_')
 		return;
 
 	if (!isset($PARAMS['client']))
