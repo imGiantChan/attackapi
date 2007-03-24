@@ -164,7 +164,7 @@ function export_to_json($php_val) {
 
 			return $tmp.']';
 		} else
-			return "'".str_replace("'", "\'", stripslashes($php_val))."'";
+			return "'".str_replace(array("\b", "\t", "\n", "\f", "\r", "'"), array('\b', '\t', '\n', '\f', '\r', "\'"), stripslashes($php_val))."'";
 }
 
 #
