@@ -1,10 +1,30 @@
 
 /**
+ * @name AttackAPI.Class
+ * @desc base class utilities
+ * @implement __anonymous_
+ */
+AttackAPI.Class.implement({
+	/**
+	 * @name AttackAPI.Class.prototype.extend
+	 * @desc extend target object with source
+	 * @param Object t the target object to extend
+	 * @param Object s the source
+	 */
+	extend: function (t, s) {
+		for (var i in s) {
+			t[i] = s[i];
+		}
+	}
+});
+
+/**
  * @name AttackAPI.Util
  * @desc base util class, father of all utils
  * @extend AttackAPI.Class 
  */
 AttackAPI.Util = AttackAPI.Class.extend({
+	/* empty */
 });
 
 /**

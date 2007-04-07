@@ -27,8 +27,9 @@ AttackAPI.Class.prototype.initialize = function () {};
  */
 AttackAPI.Class.extend = function (def) {
 	var classDef = function() {
-		if (arguments[0] !== AttackAPI.Class)
+		if (arguments[0] !== AttackAPI.Class) {
 			this.initialize.apply(this, arguments);
+		}
 	};
 	
 	var proto = new this(AttackAPI.Class);
@@ -37,8 +38,9 @@ AttackAPI.Class.extend = function (def) {
 	for (var n in def) {
 		var item = def[n];
 		
-		if (item instanceof Function)
+		if (item instanceof Function) {
 			item.$ = superClass;
+		}
 			
 		proto[n] = item;
 	}
@@ -59,11 +61,13 @@ AttackAPI.Class.extend = function (def) {
  */
 AttackAPI.Class.implement = function (def, map) {
 	var def = def.prototype?def.prototype:def;
-	var map = map?map:{};
+	var map = ((map != undefined)?map:{});
 	
-	for (var i in def)
-		if (map[i])
+	for (var i in def) {
+		if (map[i]) {
 			this.prototype[map[i]] = def[i];
-		else
+		} else {
 			this.prototype[i] = def[i];
+		}
+	}
 };
