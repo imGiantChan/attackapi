@@ -1,2 +1,0 @@
-
-AttackAPI.dom = {};
