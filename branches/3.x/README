@@ -4,22 +4,8 @@ AttackAPI provides simple and intuitive programmable interface for composing
 attack vectors with JavaScript and other client and server related
 technologies.
 
-CREDITS
-=======
-Special thanks to:
-
-  * Jeremiah Grossman - http://jeremiahgrossman.blogspot.com/
-  * RSnake - http://ha.ckers.org
-  * Daniel Bartlett - http://f-box.org/~dan/
-  * Peter Paul Koch - http://www.quirksmode.org/
-  * Tyler Akins - http://rumkin.com
-  * Vladislav Mysla
-    
-whose ideas and source code greatly influanced the 1.x branch. Many thanks to
-all jQuery developers who inspired the 2.x branch.
-
 PS
 ==
 AttackAPI is expanding into full featured client, server attack framework.
-For that reasons, the 2.x branch was completely redesigned. Any suggestions,
+For that reasons, the 3.x branch was completely redesigned. Any suggestions,
 comments and contributions will be greatly appriciated.
