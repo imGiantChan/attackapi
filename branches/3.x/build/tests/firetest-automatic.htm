@@ -3,59 +3,10 @@
 		<title>Automatic Firetest</title>
 		<script src="firetest/firebug.js" type="text/javascript"></script>
 		<script src="firetest/firetest.js" type="text/javascript"></script>
-		<script src="../build/AttackAPI-standalone.js" type="text/javascript"></script>
+		<script src="../build/AttackAPI.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<script type="text/javascript">
-			function testBuildDomain() {
-				var d1 = $A.utils.buildDomain({tld: 'com'});
-				var d2 = $A.utils.buildDomain({name: 'example'});
-				var d3 = $A.utils.buildDomain({subdomain: 'sub'});
-				var d4 = $A.utils.buildDomain({subdomain: 'sub', name: 'example'});
-				var d5 = $A.utils.buildDomain({subdomain: 'sub', tld: 'com'});
-				var d6 = $A.utils.buildDomain({name: 'example', tld: 'com'});
-				
-				assert(
-					'function utils.buildDomain',
-					d1 == 'com' && d2 == 'example' && d3 == 'sub' && d4 == 'sub.example' && d5 == 'sub.com' && d6 == 'example.com',
-					d1, d2, d3, d4, d5, d6);
-			}
-			
-			function testBuildQuery() {
-				var q1 = $A.utils.buildQuery({q1:''});
-				var q2 = $A.utils.buildQuery({q1:'', q2:''});
-				var q3 = $A.utils.buildQuery({name:'q1', value:'q2'});
-				var q4 = $A.utils.buildQuery({name:'q1', value:'='});
-				var q5 = $A.utils.buildQuery({name:null, value: undefined});
-				
-				assert(
-					'function utils.buildQuery',
-					q1 == 'q1=' && q2 == 'q1=&q2=' && q3 == 'name=q1&value=q2' && q4 == 'name=q1&value=%3D' && q5 == 'name=&value=',
-					q1, q2, q3, q4, q5);
-			}
-			
-			function testBuildURL() {
-			}
-			
-			function testScanHistory() {
-				var results = {};
-				$A.dom.scanHistory({
-					urls: [document.location],
-					
-					onfound: function (url) {
-						results[url] = true
-					},
-					
-					oncomplete: function () {
-						if (results[document.location])
-							success('function dom.historyScan');
-						else {
-							failure('function dom.historyScan');
-							log(results);
-						}
-					}
-				});
-			}
 		</script>
 		<input type="button" value="Start Firetesting" onclick="start()"/>
 	</body>

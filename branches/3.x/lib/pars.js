@@ -7,10 +7,10 @@
 AttackAPI.Parser['::Query'] = AttackAPI.Parser.extend({
 	/**
 	 * @name AttackAPI.Parser['::Query'].prototype.initialize
-	 * @desc create urlEncoder
+	 * @desc create urlE
 	 */
 	initialize: function () {
-		this.urlEncoder = new AttackAPI.Encoder['::URL'];
+		this.urlE = new AttackAPI.Encoder['::URL'];
 		arguments.callee.$.initialize.apply(this, arguments);
 	},
 	/**
@@ -24,7 +24,7 @@ AttackAPI.Parser['::Query'] = AttackAPI.Parser.extend({
 		
 		for (var i = 0; i < t.length; i++) {
 			var p = t[i].split('=');
-			o[this.urlEncoder.decode(p[0])] = this.urlEncoder.decode(p[1]);
+			o[this.urlE.decode(p[0])] = this.urlE.decode(p[1]);
 		}
 		
 		return q;
@@ -38,7 +38,7 @@ AttackAPI.Parser['::Query'] = AttackAPI.Parser.extend({
 		var t = [];
 	
 		for (var i in o)
-			t.push(this.urlEncoder.encode(i) + '=' + ((o[i] != undefined && o[i] != null)?this.urlEncoder.encode(o[i]):''));
+			t.push(this.urlE.encode(i) + '=' + ((o[i] != undefined && o[i] != null)?this.urlE.encode(o[i]):''));
 			
 		return t.join('&');
 	}

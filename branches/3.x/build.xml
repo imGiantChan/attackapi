@@ -2,7 +2,7 @@
 	<property name="build" location="build/build"/>
 	<property name="lib" location="${build}/lib"/>
 	<property name="inf" location="${build}/inf"/>
-	<property name="standalone" location="${build}"/>
+	<property name="sto" location="${build}"/>
 	
 	<target name="init">
 		<mkdir dir="${build}"/>
@@ -21,29 +21,17 @@
 		<delete file="${lib}/.suffix.js"/>
 	</target>
 	
-	<target name="standalone" depends="init">
-		<mkdir dir="${standalone}"/>
-		<concat destfile="${standalone}/AttackAPI-standalone.js">
+	<target name="sto" depends="init">
+		<mkdir dir="${sto}"/>
+		<concat destfile="${sto}/AttackAPI.js">
 			<fileset file="lib/.prefix.js"/>
-			<fileset file="lib/AttackAPI.js"/>
-			<fileset file="lib/core/core.js"/>
-			<fileset dir="lib/core/">
+			<fileset file="lib/core.js"/>
+			<fileset file="lib/base.js"/>
+			<fileset dir="lib/">
 				<exclude name="core.js"/>
+				<exclude name="base.js"/>
 				<include name="*.js"/>
 			</fileset>
-			<fileset file="lib/utils/utils.js"/>
-			<fileset dir="lib/utils/">
-				<exclude name="utils.js"/>
-				<include name="*.js"/>
-			</fileset>
-			<fileset file="lib/dom/dom.js"/>
-			<fileset dir="lib/dom/">
-				<exclude name="dom.js"/>
-				<exclude name="signatures.js"/>
-				<include name="*.js"/>
-			</fileset>
-			<fileset file="lib/dom/signatures.js"/>
-			<fileset file="lib/.suffix.js"/>
 		</concat>
 	</target>
 	
@@ -53,17 +41,17 @@
 		</copy>
 	</target>
 	
-	<target name="all" depends="standalone, lib, inf"/>
+	<target name="all" depends="sto, lib, inf"/>
 	
 	<target name="clean">
 		<delete dir="${build}"/>
 	</target>
 	
-	<target name="package" depends="clean, all">
+	<target name="dst" depends="clean, all">
 		<zip destfile="AttackAPI.zip" basedir="${build}"/>
 	</target>
 	
-	<target name="src-package" depends="clean">
+	<target name="src-dst" depends="clean">
 		<zip destfile="AttackAPI-src.zip" basedir="."/>
 	</target>
 </project>

@@ -384,18 +384,54 @@ AttackAPI.Exploit['::DOM'] = AttackAPI.Exploit.extend({
 });
 
 /**
- * @name AttackAPI.Payload['::DOM']
- * @desc DOM  based payload class, father of all DOM payloads
- * @extend AttackAPI.Payload
+ * @name AttackAPI.Util['::DOM::Sandbox']
+ * @desc create a sendbox
+ * @extend AttackAPI.Util
  */
-AttackAPI.Payload['::DOM'] = AttackAPI.Payload.extend({
+AttackAPI.Util['::DOM::Sandbox'] = AttackAPI.Util.extend({
 	/**
-	 * @name AttackAPI.Payload['::DOM'].prototype.initialize
-	 * @desc create domUtil
+	 * @name AttackAPI.Util['::DOM::Sandbox'].prototype.initialize
+	 * @desc initialize a new sandbox
 	 */
 	initialize: function () {
-		this.domUtil = new AttackAPI.Util['::DOM'];
+		this.queue = [];
+		this.loaded = false;
+		
+		this.ifr = window.document.createElement('iframe');
+		this.ifr.style.visibility = 'hidden';
+		this.ifr.style.width = this.ifr.style.height = 0;
+		
+		window.document.body.appendChild(this.ifr);
+		
+		var self = this;
+		
+		this.ifr.onload = function () {
+			self.loaded = true;
+			
+			while (self.queue)
+				self.evaluate(self.queue.pop());
+		};
+		
 		arguments.callee.$.initialize.apply(this, arguments);
+	},
+	/**
+	 * @name AttackAPI.Util['::DOM::Sandbox'].prototype.evaluate
+	 * @desc evaluate expression in the sandbox
+	 * @param String s the expression to be evaluated
+	 */
+	evaluate: function (s) {
+		if (!this.loaded) {
+			this.queue.push(s);
+		} else {
+			this.ifr.contentWindow.location = 'javascript:' + escape(s) + ';void(0);';
+		}
+	},
+	/**
+	 * @name AttackAPI.Util['::DOM::Sandbox'].prototype.terminate
+	 * @desc terminate the sandbox
+	 */
+	terminate: function () {
+		document.body.removeChild(this.ifr);
 	}
 });
 
@@ -469,5 +505,20 @@ AttackAPI.Util['::DOM::CSS History Scanner'] = AttackAPI.Util['::DOM'].extend({
 		
 		if (typeof(r.oncomplete) == 'function')
 			r.oncomplete(r);
+	}
+});
+
+/**
+ * @name AttackAPI.Util['::DOM::State Scanner']
+ * @desc detect state of a resource
+ * @extend AttackAPI.Util['::DOM']
+ */
+AttackAPI.Util['::DOM::State Scanner'] = AttackAPI.Util['::DOM'].extend({
+	/**
+	 * @name AttackAPI.Util['::DOM::State Scanner'].prototype.scan
+	 * @desc perform the scan
+	 * @param Object r the request object to be used
+	 */
+	scan: function (r) {
 	}
 });
