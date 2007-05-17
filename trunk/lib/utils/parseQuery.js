@@ -1,4 +1,10 @@
 
+/**
+ * @name AttackAPI.util.parseQuery
+ * @desc parse Query into object
+ * @param {String} query the query to parse
+ * @return {Object} parsed string object
+ */
 AttackAPI.utils.parseQuery = function (query) {
 	var queryobj = new Object();
 	var tokens = query.split('&');

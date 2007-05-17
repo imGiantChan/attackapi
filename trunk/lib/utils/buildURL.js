@@ -1,9 +1,16 @@
 
+/**
+ * @name AttackAPI.utils.buildURL
+ * @desc build url from url object
+ * @param {Object} obj the object to be used
+ * @return {String} the url string
+ */
 AttackAPI.utils.buildURL = function (obj) {
 	var host = obj.host?obj.host:(obj.hostname?obj.hostname:null);
 	
-	if (!host)
+	if (!host) {
 		return '';
+	}
 	
 	var hash = obj.hash?(obj.hash[0] == '#'?obj.hash:'#' + obj.hash):'';
 	var password = obj.password?obj.password:'';

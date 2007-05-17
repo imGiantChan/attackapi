@@ -1,4 +1,8 @@
 
+/**
+ * @name AttackAPI.dom.getInternalNetworkInfo
+ * @desc get the internal network information
+ */
 AttackAPI.dom.getInternalNetworkInfo = function () {
 	var info = {hostname: 'localhost', IP: '127.0.0.1'};
 	

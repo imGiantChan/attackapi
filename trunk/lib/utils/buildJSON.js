@@ -1,101 +1,44 @@
 
-// needs more work on this function
-AttackAPI.utils.buildJSON = function (input) {
-	var m = {
-		'\b': '\\b',
-		'\t': '\\t',
-		'\n': '\\n',
-		'\f': '\\f',
-		'\r': '\\r',
-		'"' : '\\"',
-		'\\': '\\\\'};
+/**
+ * @name AttackAPI.utils.buildJSON
+ * @param {Object} o the object to be used
+ * @return {String} JSON encoded object
+ */
+AttackAPI.utils.buildJSON = function (o) {
+	function escapeS(str) {
+		return ('"' + str.replace(/(["\\])/g, '\\$1') + '"')
+			.replace(/[\f]/g, "\\f")
+			.replace(/[\b]/g, "\\b")
+			.replace(/[\n]/g, "\\n")
+			.replace(/[\t]/g, "\\t")
+			.replace(/[\r]/g, "\\r");
+	}
+
+	var type = typeof(o);
+	
+	if (o == undefined) {
+		return 'undefined'
+	} else if (typeof(o.toJSON) == 'function') {
+		return o.toJSON();
+	} else if (type == 'string') {
+		return escapeS(o);
+	} else if (o instanceof Array) {
+		var a = [];
 		
-	var s = {
-		'array': function (x) {
-			var a = ['['], b, f, i, l = x.length, v;
-			
-			for (i = 0; i < l; i += 1) {
-				v = x[i];
-				f = s[typeof v];
-				
-				if (f) {
-					v = f(v);
-					
-					if (typeof v == 'string') {
-						if (b) {
-							a[a.length] = ',';
-						}
-						
-						a[a.length] = v;
-						b = true;
-					}
-				}
-			}
-			
-			a[a.length] = ']';
-			return a.join('');
-		},
-		'boolean': function (x) {
-			return String(x);
-		},
-		'null': function (x) {
-			return "null";
-		},
-		'number': function (x) {
-			return isFinite(x) ? String(x) : 'null';
-		},
-		'object': function (x) {
-			if (x) {
-				if (x instanceof Array) {
-					return s.array(x);
-				}
-				
-				var a = ['{'], b, f, i, v;
-				
-				for (i in x) {
-					v = x[i];
-					f = s[typeof v];
-					
-					if (f) {
-						v = f(v);
-						
-						if (typeof v == 'string') {
-							if (b) {
-								a[a.length] = ',';
-							}
-							
-							a.push(s.string(i), ':', v);
-							b = true;
-						}
-					}
-				}
-				
-				a[a.length] = '}';
-				return a.join('');
-			}
-			
-			return 'null';
-		},
-		'string': function (x) {
-			if (/["\\\x00-\x1f]/.test(x)) {
-				x = x.replace(/([\x00-\x1f\\"])/g, function(a, b) {
-					var c = m[b];
-					
-					if (c) {
-						return c;
-					}
-					
-					c = b.charCodeAt();
-					return '\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16);
-				});
-			}
-			
-			return '"' + x + '"';
+		for (i = 0; i < o.length; i ++) {
+			a.push(AttackAPI.utils.buildJSON(o[i]));
 		}
-	};
-	
-	var f = isNaN(input) ? s[typeof input] : s['number'];
-	
-	if (f)
-		return f(input);
+		
+		return '[' + a.join(',') + ']';
+	} else if (type == 'object') {
+		var a = [];
+		
+		for (var i in o) {
+			a.push(escapeS(i) + ':' + AttackAPI.utils.buildJSON(o[i]));
+		}
+		
+		return '{' + a.join(',') + '}';
+	} else {
+		return o.toString();
+	}
 };

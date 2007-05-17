@@ -1,4 +1,9 @@
 
+/**
+ * @name AttackAPI.utils.encodeBase64
+ * @param {String} input the string to encode
+ * @return {String} base64 encoded string
+ */
 AttackAPI.utils.encodeBase64 = function (input) {
 	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
@@ -17,10 +22,11 @@ AttackAPI.utils.encodeBase64 = function (input) {
 		enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
 		enc4 = chr3 & 63;
 		
-		if (isNaN(chr2))
+		if (isNaN(chr2)) {
 			enc3 = enc4 = 64;
-		else if (isNaN(chr3))
+		} else if (isNaN(chr3)) {
 			enc4 = 64;
+		}
 		
 		result += chars.charAt(enc1) + chars.charAt(enc2) + chars.charAt(enc3) + chars.charAt(enc4);
 	} while (i < input.length);
