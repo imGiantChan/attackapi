@@ -1,6 +1,6 @@
 <?php
 #
-# VERSION: 2.2.0a
+# VERSION: 3.0.0a
 # AUTHOR: Petko Petkov | pdp (architect)
 # HOMEPAGE: http://www.gnucitizen.org
 #
@@ -8,7 +8,6 @@
 #
 # DEFAULT CONFIGURATION
 #
-
 $SESSION_NAME = 'SESSIONID';
 $SESSION_BACKEND = 'FileSystemBackend';
 $SESSION_CONFIG = array('session_folder' => '.htsessions', 'session_expiry' => 60);
@@ -16,7 +15,6 @@ $SESSION_CONFIG = array('session_folder' => '.htsessions', 'session_expiry' => 6
 #
 # REGISTERED GLOBALS
 #
-
 $PARAMS = null;
 $BACKEND = null;
 $REFERRER = null;
@@ -24,7 +22,6 @@ $REFERRER = null;
 #
 # UNIFY PARAMETERS
 #
-
 foreach ($_GET as $key => $val)
 	$PARAMS[trim($key)] = $val;
 
@@ -32,9 +29,8 @@ foreach ($_POST as $key => $val)
 	$PARAMS[trim($key)] = $val;
 
 #
-# RETRIEVE THE REFERRER
+# SET REFERRER
 #
-
 if (isset($PARAMS['referrer']))
 	$REFERRER = $PARAMS['referrer'];
 else
@@ -46,34 +42,29 @@ else
 #
 # SEND DEFAULT CONTENT TYPE HEADER
 #
-
 header('Content-Type: text/javascript');
 
 #
 # LOAD EXTERNAL CONFIGURATION
 #
-
 if (file_exists(dirname(__FILE__).'/config.php'))
 	require_once dirname(__FILE__).'/config.php';
 
 #
 # LOAD EXTERNAL BACKEND
 #
-
 if (!class_exists($SESSION_BACKEND))
 	require_once $SESSION_BACKEND.'.php';
 
 #
 # INITIALIZE THE BACKEND
 #
-
 $BACKEND = new $SESSION_BACKEND();
 $BACKEND->configure($SESSION_CONFIG);
 
 #
 # INITIALIZE THE SESSION
 #
-
 session_set_save_handler(
 	array(&$BACKEND, '__open'),
 	array(&$BACKEND, '__close'),
@@ -88,7 +79,6 @@ session_start();
 #
 # GET CLIENT DETAILS
 #
-
 if (!isset($_SESSION['_client_agent']))
 	$_SESSION['_client_agent'] = $_SERVER['HTTP_USER_AGENT'];
 
@@ -98,7 +88,6 @@ if (!isset($_SESSION['_client_ip']))
 #
 # INITIALIZE THE MESSAGE QUEUE
 #
-
 if (!isset($_SESSION['_message_queue']) || !is_array($_SESSION['_message_queue']))
 	$_SESSION['_message_queue'] = array();
 
@@ -108,7 +97,6 @@ if (isset($REFERRER) && !isset($_SESSION['_message_queue'][$REFERRER]))
 #
 # DISPATCH
 #
-
 if (isset($PARAMS['action']) && function_exists('action_'.$PARAMS['action']))
 	echo call_user_func('action_'.$PARAMS['action']);
 else
@@ -117,13 +105,11 @@ else
 #
 # FINISH
 #
-
 session_write_close();
 
 #
 # HELPERS
 #
-
 function is_assoc($php_val) {
 	return is_array($php_val) && array_keys($php_val) !== range(0, sizeof($php_val) - 1);
 }
@@ -170,7 +156,6 @@ function export_to_json($php_val) {
 #
 # ACTIONS
 #
-
 function action_push() {
 	global $PARAMS;
 	global $BACKEND;
@@ -395,9 +380,8 @@ function action_init() {
 }
 
 #
-# BACKEND CLASS
+# BACKEND PROTOTYPE
 #
-
 class Backend {
 	function configure($config) {
 		$this->config = $config;
@@ -425,7 +409,6 @@ class Backend {
 #
 # DEFAULT BACKEND
 #
-
 class FileSystemBackend extends Backend {
 	function open() {
 		$path = dirname(__FILE__).'/'.$this->config['session_folder'];
