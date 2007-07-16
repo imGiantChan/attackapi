@@ -18,9 +18,10 @@ AttackAPI.parseURL = function (url) {
 	}
 	
 	result.hash = result.hash?'#' + result.hash:'#';
-	result.search = result.search?'?' + result.search:'?';
 	result.username = result.username?result.username:'';
 	result.password = result.password?result.password:'';
+	result.search = result.search?'?' + result.search:'?';
+	result.pathname = result.pathname?result.pathname:'/';
 	
 	if (result.port == undefined) {
 		switch (result.protocol) {

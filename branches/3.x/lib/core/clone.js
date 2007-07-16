@@ -7,8 +7,11 @@
  * @return {Object} cloned object
  */
 AttackAPI.clone = function (o) {
-	var _o = arguments.callee;
-	_o.prototype = o;
-	
-	return new _o();
+	function clone (o) {
+		for (var i in o) {
+			this[i] = o[i];
+		}
+	}
+
+	return new clone(o);
 };
