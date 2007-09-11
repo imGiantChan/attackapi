@@ -2,8 +2,10 @@
 	<property name="build" location="build/build"/>
 	<property name="lib" location="${build}/lib"/>
 	<property name="inf" location="${build}/inf"/>
+	<property name="doc" location="${build}/doc"/>
 	<property name="sto" location="${build}"/>
-	
+	<property name="rhino" value="build/jar/rhino.jar"/>
+
 	<target name="init">
 		<mkdir dir="${build}"/>
 		<copy todir="${build}">
@@ -11,46 +13,59 @@
 			<fileset file="COPYING"/>
 		</copy>
 	</target>
-	
+
 	<target name="lib" depends="init">
 		<mkdir dir="${lib}"/>
 		<copy todir="${lib}/">
 			<fileset dir="lib/"/>
 		</copy>
-		<delete file="${lib}/.prefix.js"/>
-		<delete file="${lib}/.suffix.js"/>
 	</target>
-	
+
 	<target name="sto" depends="init">
-		<mkdir dir="${sto}"/>
-		<concat destfile="${sto}/AttackAPI.js">
-			<fileset file="lib/.prefix.js"/>
-			<fileset file="lib/core.js"/>
-			<fileset file="lib/base.js"/>
-			<fileset dir="lib/">
-				<exclude name="core.js"/>
-				<exclude name="base.js"/>
-				<include name="*.js"/>
-			</fileset>
-		</concat>
 	</target>
-	
+
 	<target name="inf" depends="init">
 		<copy todir="${inf}">
-			<fileset dir="inf"/>
+			<fileset dir="inf/"/>
 		</copy>
 	</target>
-	
+
+	<target name="doc" depends="init">
+		<mkdir dir="${doc}"/>
+		<mkdir dir="${doc}/data"/>
+		<concat destfile="${build}/__AttackAPI.js">
+			<fileset file="lib/core/.prefix.js"/>
+			<fileset file="lib/core/core.js"/>
+			<fileset dir="lib/core">
+				<exclude name=".prefix.js"/>
+				<exclude name=".suffix.js"/>
+				<exclude name="core.js"/>
+				<include name="*.js"/>
+			</fileset>
+			<fileset dir="lib/">
+				<exclude name="core/*.js"/>
+				<include name="**/*.js"/>
+			</fileset>
+			<fileset file="lib/core/.suffix.js"/>
+		</concat>
+		<java jar="${rhino}" fork="true">
+			<arg value="build/scr/doc.js"/>
+			<arg value="${build}/__AttackAPI.js"/>
+			<arg value="${doc}"/>
+		</java>
+		<delete file="${build}/__AttackAPI.js"/>
+	</target>
+
 	<target name="all" depends="sto, lib, inf"/>
-	
+
 	<target name="clean">
 		<delete dir="${build}"/>
 	</target>
-	
+
 	<target name="dst" depends="clean, all">
 		<zip destfile="AttackAPI.zip" basedir="${build}"/>
 	</target>
-	
+
 	<target name="src-dst" depends="clean">
 		<zip destfile="AttackAPI-src.zip" basedir="."/>
 	</target>

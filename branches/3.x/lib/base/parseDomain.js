@@ -3,10 +3,10 @@
  * @cat Base
  * @name AttackAPI.parseDomain
  * @desc parse domain into object
- * @param {String} domain
+ * @param {String} d domain to parse
  * @return {Object} parsed domain object
  */
-AttackAPI.parseDomain = function (domain) {
-	var tokens = domain.split('.').reverse();
-	return {domain: domain, tld: tokens[0], name: tokens[1], subdomain: tokens.slice(2).reverse().join('.')};
+AttackAPI.parseDomain = function (d) {
+	var t = d.split('.').reverse();
+	return {domain: d, tld: t[0], name: t[1], subdomain: t.slice(2).reverse().join('.')};
 };

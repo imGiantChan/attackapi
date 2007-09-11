@@ -3,15 +3,15 @@
  * @cat Base
  * @name AttackAPI.buildQuery
  * @desc build query string from object
- * @param {Object} obj the object to be used
+ * @param {Object} o the object to be used
  * @return {String} query string
  */
-AttackAPI.buildQuery = function (obj) {
-	var tokens = [];
+AttackAPI.buildQuery = function (o) {
+	var t = [];
 
-	for (var item in obj) {
-		tokens.push(this.encodeURL(item) + '=' + ((obj[item] != undefined && obj[item] != null)?this.encodeURL(obj[item]):''));
+	for (var i in o) {
+		t.push(this.encodeURL(i) + '=' + ((o[i] != undefined && o[i] != null)?this.encodeURL(o[i]):''));
 	}
 	
-	return tokens.join('&');
+	return t.join('&');
 };
