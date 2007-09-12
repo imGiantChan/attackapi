@@ -31,7 +31,9 @@
 	</target>
 
 	<target name="doc" depends="init">
-		<mkdir dir="${doc}"/>
+		<copy todir="${doc}">
+			<fileset dir="build/doc"/>
+		</copy>
 		<mkdir dir="${doc}/data"/>
 		<concat destfile="${build}/__AttackAPI.js">
 			<fileset file="lib/core/.prefix.js"/>
