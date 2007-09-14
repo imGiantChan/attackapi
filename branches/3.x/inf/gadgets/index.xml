@@ -3,4 +3,8 @@
 		name="API Documentation"
 		src="apidocumentation.xml"
 		description="list the API documentation"/>
+	<gadget
+		name="Attack Editor"
+		src="attackeditor.xml"
+		description="simple editor for agile coders"/>
 </gadgets>
