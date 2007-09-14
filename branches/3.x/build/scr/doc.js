@@ -12,6 +12,6 @@ function output(c, n) {
 
 	Object.toXML.force = {desc: 1, code: 1, before: 1, result: 1};
 	
-	var xml = Object.toXML(n == 'docs' ? { method: c } : c, 'docs');
-	writeFile(dir + '/data/' + n + '.xml', '<?xml version="1.0" encoding="ISO-8859-1"?>\n' + xml);
+	var xml = Object.toXML(n == 'docs' ? { method: c } : c, 'entry');
+	writeFile(dir + '/data/' + n + '.xml', '<?xml version="1.0" encoding="ISO-8859-1"?>\n<docs>\n' + xml + '</docs>');
 }
