@@ -50,6 +50,10 @@
 		<delete file="${build}/__AttackAPI.js"/>
 	</target>
 
+	<target name="bare-inf" depends="inf">
+		<delete dir="${inf}/PHP-INF"/>
+	</target>
+
 	<target name="all" depends="sto, lib, inf"/>
 
 	<target name="clean">

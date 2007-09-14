@@ -1,0 +1,6 @@
+<gadgets>
+	<gadget
+		name="API Documentation"
+		src="apidocumentation.xml"
+		description="list the API documentation"/>
+</gadgets>

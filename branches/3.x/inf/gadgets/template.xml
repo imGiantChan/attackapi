@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Module>
+	<ModulePrefs title="title"/> 
+	<Content type="html">
+		<![CDATA[ 
+			<div id="content__MODULE_ID__">
+			</div>
+		]]>
+	</Content> 
+</Module>
