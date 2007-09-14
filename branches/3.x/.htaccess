@@ -5,10 +5,10 @@ deny from all
 
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteRule ^/*$ /xsslab/index.htm [L]
+RewriteRule ^/*$ /attackapi/index.htm [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* /xsslab/error.htm [R,L]
+RewriteRule .* /attackapi/error.htm [R,L]
 </IfModule>
 
 Header set Cache-Control "no-store, no-cache, must-revalidate"

@@ -27,7 +27,6 @@
 		<copy todir="${inf}">
 			<fileset dir="inf/"/>
 		</copy>
-		<mkdir dir="${inf}/data"/>
 		<concat destfile="${build}/__AttackAPI.js">
 			<fileset file="lib/core/.prefix.js"/>
 			<fileset file="lib/core/core.js"/>
