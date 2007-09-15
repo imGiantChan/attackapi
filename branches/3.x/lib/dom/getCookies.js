@@ -1,11 +1,11 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getCookies
+ * @name AttackAPI.dom.getCookies
  * @desc get all cookies as an object
  * @return {Array} list of all cookies
  */
-AttackAPI.getCookies = function () {
+AttackAPI.dom.getCookies = function () {
 	var cookies = new Object();
 	var tokens = document.cookie.split(';');
 	

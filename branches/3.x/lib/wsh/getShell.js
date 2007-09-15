@@ -1,10 +1,10 @@
 
 /**
  * @cat WSH
- * @name AttackAPI.getShell
+ * @name AttackAPI.wsh.getShell
  * @desc get WScript shell
  * @return {Object} WScript.Shell
  */
-AttackAPI.getShell = function () {
+AttackAPI.wsh.getShell = function () {
 	return WScript.CreateObject('WScript.Shell');
 };

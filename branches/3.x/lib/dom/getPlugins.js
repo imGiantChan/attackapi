@@ -1,11 +1,11 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getPlugins
+ * @name AttackAPI.dom.getPlugins
  * @desc retrieve available browser plugins
  * @return {Array} array of plugin names
  */
-AttackAPI.getPlugins = function () {
+AttackAPI.dom.getPlugins = function () {
 	var plugins = new Array();
 	
 	for (var i = 0; i < navigator.plugins.length; i++) {

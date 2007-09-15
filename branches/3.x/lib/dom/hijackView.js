@@ -1,5 +1,9 @@
 
-AttackAPI.hijackView = function (obj) {
+/**
+ * @name AttackAPI.dom.hijackView
+ * @desc hijack the current view
+ */
+AttackAPI.dom.hijackView = function (obj) {
 	var doc = obj.document?obj.document:this.getDocument();
 	
 	var ifr = doc.createElement('iframe');

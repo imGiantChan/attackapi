@@ -1,11 +1,11 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getAgent
+ * @name AttackAPI.dom.getAgent
  * @desc retrieve browser agent string
  * @return {String} current browser agent
  */
-AttackAPI.getAgent = function () {
+AttackAPI.dom.getAgent = function () {
 	var agent = '';
 	
 	if (navigator.userAgent) {

@@ -1,10 +1,10 @@
 
 /**
  * @cat WSH
- * @name AttackAPI.run
+ * @name AttackAPI.wsh.run
  * @desc execute command
  * @param {String} c the command to execute
  */
-AttackAPI.run = function (c) {
+AttackAPI.wsh.run = function (c) {
 	return WScript.CreateObject('WScript.Shell').Run(c);
 };

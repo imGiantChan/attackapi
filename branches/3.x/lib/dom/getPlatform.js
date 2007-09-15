@@ -1,10 +1,10 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getPlatform
+ * @name AttackAPI.dom.getPlatform
  * @desc retrieve the operating system type
  * @return {String} platform name
  */
-AttackAPI.getPlatform = function () {
+AttackAPI.dom.getPlatform = function () {
 	return navigator.platform.toLowerCase();
 };

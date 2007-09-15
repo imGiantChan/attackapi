@@ -1,11 +1,11 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getInternalNetworkInfo
+ * @name AttackAPI.dom.getInternalNetworkInfo
  * @desc get the internal network information
  * @return {Object} network information object
  */
-AttackAPI.getInternalNetworkInfo = function () {
+AttackAPI.dom.getInternalNetworkInfo = function () {
 	var info = {hostname: 'localhost', IP: '127.0.0.1'};
 	
 	try {

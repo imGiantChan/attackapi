@@ -1,4 +1,8 @@
 
+/**
+ * @name AttackAPI.dom.requestCSRF
+ * @desc perform Cross-site request forgery attack
+ */
 AttackAPI.requestCSRF = function (request) {
 	var tmr = null;
 	

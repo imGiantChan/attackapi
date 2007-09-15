@@ -1,9 +1,9 @@
 
 /**
- * @name AttackAPI.getXHR
+ * @name AttackAPI.dom.getXHR
  * @desc return XMLHttpRequest object in a cross-browser manner
  */
-AttackAPI.getXHR = function () {
+AttackAPI.dom.getXHR = function () {
 	var xhr = null;
 	
 	if (window.XMLHttpRequest) {

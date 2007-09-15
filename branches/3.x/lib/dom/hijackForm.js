@@ -1,5 +1,9 @@
 
-AttackAPI.hijackForm = function (hijack) {
+/**
+ * @name AttackAPI.dom.hijackForm
+ * @desc hijack a form
+ */
+AttackAPI.dom.hijackForm = function (hijack) {
 	if (!hijack.form.id)
 		hijack.form.id = ('form_' + Math.random() + '_' + new Date().getTime()).replace('.', '_');
 		

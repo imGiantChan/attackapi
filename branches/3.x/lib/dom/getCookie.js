@@ -1,12 +1,12 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getCookie
+ * @name AttackAPI.dom.getCookie
  * @desc retrieve cookie value
  * @param {String} cookie the name of the cookie to retrieve
  * @return {String} cookie value
  */
-AttackAPI.getCookie = function (cookie) {
+AttackAPI.dom.getCookie = function (cookie) {
 	var tokens = document.cookie.split(';');
 	
 	for (var i = 0; i < tokens.length; i++) {

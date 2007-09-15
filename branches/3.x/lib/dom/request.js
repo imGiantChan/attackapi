@@ -1,5 +1,9 @@
 
-AttackAPI.request = function (request) {
+/**
+ * @name AttackAPI.dom.request
+ * @desc perform a request
+ */
+AttackAPI.dom.request = function (request) {
 	var tmr = null;
 	
 	var img = new Image();

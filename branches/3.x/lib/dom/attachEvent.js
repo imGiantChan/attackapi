@@ -1,7 +1,7 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.attachEvent
+ * @name AttackAPI.dom.attachEvent
  * @desc attach event listener
  * @param {Function} callback the event handler
  * @param {String} event the event name
@@ -9,7 +9,7 @@
  * @param {Boolean} capturing whether the event is capturing or not. This
  * parameter is optional.
  */
-AttackAPI.attachEvent = function (callback, event, target, capturing) {
+AttackAPI.dom.attachEvent = function (callback, event, target, capturing) {
 	var target = (target == undefined)?window:target;
 	var capturing = (capturing == undefined)?false:true;
 	

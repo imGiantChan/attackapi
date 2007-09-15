@@ -2,7 +2,7 @@
 /**
  * @cat Core
  * @name AttackAPI.iterate
- * @desc simple iterator
+ * @desc construct simple iterator for object 'o'. The returned object contains method next() which is used to retrieve the next item in sequence.
  * @param {Object} o the object to iterate on
  * @return {Object} iterator
  */

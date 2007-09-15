@@ -29,15 +29,20 @@
 		</copy>
 		<concat destfile="${build}/__AttackAPI.js">
 			<fileset file="lib/core/.prefix.js"/>
-			<fileset file="lib/core/core.js"/>
+			<fileset file="lib/core/__init__.js"/>
 			<fileset dir="lib/core">
 				<exclude name=".prefix.js"/>
 				<exclude name=".suffix.js"/>
-				<exclude name="core.js"/>
+				<exclude name="__init__.js"/>
 				<include name="*.js"/>
 			</fileset>
 			<fileset dir="lib/">
 				<exclude name="core/*.js"/>
+				<include name="**/__init__.js"/>
+			</fileset>
+			<fileset dir="lib/">
+				<exclude name="core/*.js"/>
+				<exclude name="**/__init__.js"/>
 				<include name="**/*.js"/>
 			</fileset>
 			<fileset file="lib/core/.suffix.js"/>
@@ -47,7 +52,8 @@
 			<arg value="${build}/__AttackAPI.js"/>
 			<arg value="${inf}"/>
 		</java>
-		<delete file="${build}/__AttackAPI.js"/>
+		<!-- <delete file="${build}/__AttackAPI.js"/>
+-->
 	</target>
 
 	<target name="bare-inf" depends="inf">

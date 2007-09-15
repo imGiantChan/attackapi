@@ -1,11 +1,11 @@
 
 /**
  * @cat DOM
- * @name AttackAPI.getInternalHostname
+ * @name AttackAPI.dom.getInternalHostname
  * @desc get internal hostname
  * @return {String} hostname
  */
-AttackAPI.getInternalHostname = function () {
+AttackAPI.dom.getInternalHostname = function () {
 	try {
 		var sock = new java.net.Socket();
 		

@@ -6,7 +6,7 @@
  * @param {Object} target the target. This parameter is optional.
  * @return {Object} object document
  */
-AttackAPI.getDocument = function (target) {
+AttackAPI.dom.getDocument = function (target) {
 	var doc = null;
 		
 	if (target == undefined) {

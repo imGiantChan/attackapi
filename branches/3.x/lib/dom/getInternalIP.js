@@ -5,7 +5,7 @@
  * @desc get internal IP address
  * @return {String} IP address
  */
-AttackAPI.getInternalIP = function () {
+AttackAPI.dom.getInternalIP = function () {
 	try {
 		var sock = new java.net.Socket();
 		
