@@ -40,8 +40,9 @@ $(document).ready(function () {
 
 				for (var z = 0; z < item.examples.length; z++) {
 					var example = item.examples[z]
-						.replace('&lt;pre&gt;&lt;code&gt;', '<pre><code>')
-						.replace(';&lt;/code&gt;&lt;/pre&gt;', '</code></pre>');
+						.replace(/&lt;/g, '<')
+						.replace(/&gt;/g, '>')
+						.replace(/&amp;/g, '&');
 
 					markup += '<h4>Example</h4><div class="field-example">' + example + '</div>';
 				}
@@ -59,12 +60,16 @@ $(document).ready(function () {
 						$(this).parent().children('.field-short').hide();
 						$(this).parent().children('.item-content').show();
 
+						$(this).parent().css({'margin-bottom': '2.0em'});
+
 						return false;
 					},
 					function () {
 						$(this).parent().children('.field-desc').hide();
 						$(this).parent().children('.field-short').show();
 						$(this).parent().children('.item-content').hide();
+
+						$(this).parent().css({'margin-bottom': ''});
 
 						return false;
 					}
