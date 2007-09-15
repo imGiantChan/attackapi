@@ -45,6 +45,12 @@ function parse(f) {
 				} else {
 					ret[n] = [ret[n], v];
 				}
+			} else if (ret[n + 's']) {
+				if (ret[n + 's'].constructor == Array) {
+					ret[n + 's'].push(v);
+				} else {
+					ret[n + 's'] = [ret[n + 's'], v];
+				}
 			} else {
 				ret[n] = v;
 			}
