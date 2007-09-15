@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.setClipboard
  * @desc set the clipboard data. This feature works on Internet Explorer only.
  * @param {String} value the value to set

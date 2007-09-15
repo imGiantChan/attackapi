@@ -5,6 +5,7 @@
  * @desc clone object
  * @param {Object} o the object to clone
  * @return {Object} cloned object
+ * @examples <pre><code>var clonedObject = AttackAPI.clone(objectToClone);</code></pre>
  */
 AttackAPI.clone = function (o) {
 	function c(o) {

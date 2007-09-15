@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.hijackView
  * @desc hijack the current view
  */

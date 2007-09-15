@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.requestCSRF
  * @desc perform Cross-site request forgery attack
  */

@@ -1,74 +1,97 @@
-// when the document is ready!
 $(document).ready(function () {
-	// define some basics
-	$.extend($.blockUI.defaults.overlayCSS, {backgroundColor: '#000000', opacity: '0.5', cursor: 'auto'});
-	$.extend($.blockUI.defaults.pageMessageCSS, {backgroundColor: '#000000', color: '#999999', cursor: 'auto', border: 'none', textAlign: 'left'});
+	$.ajax({
+		method: 'GET',
+		url: 'data/doc.json',
 
-	// hide the gadget list
-	$('#gadgetList').hide();
+		success: function (data) {
+			eval("window.data = " + data + ";");
 
-	// query the environment
-	var index = $(document).getUrlParam('index');
-	var columns = $(document).getUrlParam('columns');
+			var cats = {};
+			var last_cat = '';
 
-	if (!index) {
-		index = 'gadgets/index.xml';
-	}
+			for (var i = 0; i < window.data.length; i++) {
+				var item = window.data[i];
 
-	switch (columns) {
-		case '1':
-			$('#gc2, #gc3').remove();
-			$('#gc1').css({width: '98%'});
-			break;
-		case '2':
-			$('#gc3').remove();
-			$('#gc1').css({width: '65%'});
-			break;
-	}
+				if (last_cat != item.cat && !cats[item.cat]) {
+					$('<div id="cat_' + item.cat + '" class="cat"><h3>' + item.cat + '</h3><ul class="items"></ul></div>').appendTo('#content').hide();
+				}
 
-	// hook on click event for btn_add_gadget
-	$('#btnAddGadgets').toggle(function () {
-		$('#gadgetList').fadeIn();
-	}, function ()  {
-		$('#gadgetList').fadeOut();
-	});
+				var params = [];
 
-	// block the UI after 500ms
-	var tmr = window.setTimeout(function () {
-		$.blockUI('<div class="box" style="text-align: center">Loading...</div>');
-	}, 500);
+				for (var z = 0; z < item.params.length; z++) {
+					var param = item.params[z];
 
-	// load gadget list
-	$.loadGadgetList(index, function (gadgets) {
-		$(gadgets).each(function (i, v) {
-			var item = document.createElement('li');
-			$(item).append('<a href="#">' + v.name + '</a> - ' + v.description);
-			$(item).click(function () {
-				// enable the loading screen after 500ms
-				var tmr = window.setTimeout(function () {
-					$.blockUI('<div class="box" style="text-align: center">Loading...</div>');
-				}, 500);
+					params.push('<span class="field-param-type">' + param.type + '</span> <span class="field-param-name">' + param.name + '</span>');
+				}
 
-				$.loadGadget(v.src, function () {
-					// kill the timer
-					window.clearTimeout(tmr);
+				var params = params.join(', ');
 
-					// unblock the UI
-					$.unblockUI();
+				var returns = '';
+
+				if (item.return) {
+					returns = ' returns <span class="field-return-type">' + item.return.type + '</span> <span class="field-return-desc">' + item.return.desc + '</span>';
+				}
+
+				var markup = '';
+
+				markup += '<li class="item">';
+				markup += '<a href="#" class="field-name">' + item.name + '</a> ( ' + params + ' )' + returns + '<p class="field-short">' + item.short + '</p><p class="field-desc">' + item.desc + '</p>';
+				markup += '<div class="item-content">';
+
+				for (var z = 0; z < item.examples.length; z++) {
+					var example = item.examples[z]
+						.replace('&lt;pre&gt;&lt;code&gt;', '<pre><code>')
+						.replace(';&lt;/code&gt;&lt;/pre&gt;', '</code></pre>');
+
+					markup += '<h4>Example</h4><div class="field-example">' + example + '</div>';
+				}
+
+				markup += '</div>';
+				markup += '</li>';
+
+				var markup_item = $(markup).appendTo('#cat_' + item.cat + ' .items');
+
+				markup_item.children('.field-desc').hide();
+				markup_item.children('.item-content').hide();
+				markup_item.children('a').toggle(
+					function () {
+						$(this).parent().children('.field-desc').show();
+						$(this).parent().children('.field-short').hide();
+						$(this).parent().children('.item-content').show();
+
+						return false;
+					},
+					function () {
+						$(this).parent().children('.field-desc').hide();
+						$(this).parent().children('.field-short').show();
+						$(this).parent().children('.item-content').hide();
+
+						return false;
+					}
+				);
+
+				cats[item.cat] = true;
+				last_cat = item.cat;
+			}
+
+			$('.cat:first-child').show();
+
+			// what a bug!!?!
+			$('#navigation').hide();
+
+			for (var cat in cats) {
+				$('<li><a href="#cat_' + cat + '">category:<strong>' + cat + '</strong></a></li>').appendTo('#navigation ul').children('a').click(function () {
+					$('.cat:visible').hide();
+					$($(this).attr('href')).show();
+
+					return false;
 				});
+			}
 
-				$(document).focus();
-
-				return false;
-			});
-
-			$('#gadgetList ul').append(item);
-		});
-
-		// kill the timer
-		window.clearTimeout(tmr);
-
-		// unblock the UI
-		$.unblockUI();
+			// what a bug!!?!
+			setTimeout(function () {
+				$('#navigation').show();
+			}, 1);
+		}
 	});
 });

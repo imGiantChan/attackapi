@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.include
  * @desc include remote script into the browser DOM
  */

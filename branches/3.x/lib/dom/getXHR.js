@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.getXHR
  * @desc return XMLHttpRequest object in a cross-browser manner
  */

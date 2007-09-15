@@ -1,5 +1,6 @@
 
 /**
+ * @cat DOM
  * @name AttackAPI.dom.parseHTML
  * @desc parse xml string into DOM structure
  * @param {String} html the string to process

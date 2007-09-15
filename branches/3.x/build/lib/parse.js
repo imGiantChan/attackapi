@@ -25,7 +25,12 @@ function parse(f) {
 					return ret;
 				})*/ || 1;
 
-			if (n == 'param' || n == 'option') {
+			if (n == 'return') {
+				var args = v.split(/\s+/);
+				v = args.slice(1, args.length);
+				v = {type: args[0], desc: v.join(' ')};
+				n = 'return';
+			} else if (n == 'param' || n == 'option') {
 				var args = v.split(/\s+/);
 				v = args.slice( 2, args.length );
 				v = {type: args[0], name: args[1], desc: v.join(' ')};
