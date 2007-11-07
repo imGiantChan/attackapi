@@ -9,8 +9,8 @@
  * @example The following example demonstrates how the function can be used:
  * <pre><code>var obj = {name: 'Fred'};
  * AttackAPI.extend(obj, {lastName: 'Johnson'});</code></pre>
- * After 'extend' is called, object 'obj' obtains an additional parameter
- * 'lastName'.
+ * After <strong>extend</strong> is called, object <strong>obj<strong> obtains
+ * an additional parameter <strong>lastName</strong>.
  */
 AttackAPI.extend = function (o, p) {
 	for (var i in p) {

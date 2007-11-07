@@ -2,11 +2,13 @@
 /**
  * @cat Base
  * @name AttackAPI.decodeURL
- * @desc decode URL
- * @param {String} url the url to decode
+ * @desc decodes URL encodes strings.
+ * @param {String} u the url to decode
  * @return {String} URL decoded string
- * @todo this one should be cross-platformed
+ * @todo requires cross-platform inplementation
+ * @examples <pre><code>var u = AttackAPI.decodeURL('gnucitizen.org%20rulez');</code></pre>
+ * <p>results into string <strong>'gnucitizen.org rulez'</strong>.</p>
  */
-AttackAPI.decodeURL = function (url) {
-	return unescape(url);
+AttackAPI.decodeURL = function (u) {
+	return unescape(u);
 };

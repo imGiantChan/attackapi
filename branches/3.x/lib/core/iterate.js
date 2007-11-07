@@ -8,8 +8,8 @@
  * the object.
  * @param {Object} o the object to iterate on
  * @return {Object} iterator
- * @example The 'iterate' function is suitable for iterating over Array like
- * objects (the length parameter is required). Here is an example:
+ * @example The function is suitable for iterating over Array like * objects
+ * (i.e. the length object member is required). Here is an example:
  * <pre><code>var a = [1,2,3,4,5,6,7,8,9,0];
  * var iterator = AttackAPI.iterate(a);
  * setTimeout(function () {

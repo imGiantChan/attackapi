@@ -1,3 +1,4 @@
+
 var AttackAPI = {
 	version: '3.0.0a',
 	author: 'Petko Petkov | pdp (architect)',
