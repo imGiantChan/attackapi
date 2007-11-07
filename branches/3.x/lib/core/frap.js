@@ -10,9 +10,10 @@
  * @example This function is suitable for encapsulaing a function call
  * together with the function parameters. Here is an example:
  * <pre><code>setTimeout(AttackAPI.frap(alert, 'Alert!'), 1000);</code></pre>
- * In the example above we bind function 'alert' with parameter 'Alert!'. The
- * result function is called by setTimeout every second. Note that the amount
- * of code that we saved. Traditionally we achieve the same effect like this:
+ * In the example above we bind function <strong>alert</strong> with parameter
+ * <strong>'Alert!'</strong>. The result function is called by setTimeout every
+ * second. Note that the amount of code that we saved. Traditionally we achieve
+ * the same effect like this:
  * <pre><code>setTimeout(function () {
  *     alert('Alert!');
  * });</code></pre>

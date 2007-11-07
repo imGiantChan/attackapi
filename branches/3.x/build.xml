@@ -21,17 +21,15 @@
 		</copy>
 	</target>
 
-	<target name="sto" depends="init">
-	</target>
-
 	<target name="inf" depends="init">
+		<mkdir dir="${inf}"/>
+		<copy todir="${inf}/">
+			<fileset dir="inf/"/>
+		</copy>
 	</target>
 
-	<target name="doc" depends="init">
-		<copy todir="${doc}">
-			<fileset dir="doc/"/>
-		</copy>
-		<concat destfile="${build}/__AttackAPI.js">
+	<target name="sto" depends="init">
+		<concat destfile="${build}/AttackAPI.js">
 			<fileset file="lib/core/.prefix.js"/>
 			<fileset file="lib/core/__init__.js"/>
 			<fileset dir="lib/core">
@@ -51,12 +49,17 @@
 			</fileset>
 			<fileset file="lib/core/.suffix.js"/>
 		</concat>
+	</target>
+
+	<target name="doc" depends="sto">
+		<copy todir="${doc}">
+			<fileset dir="doc/"/>
+		</copy>
 		<java jar="${rhino}" fork="true">
 			<arg value="build/scr/doc.js"/>
-			<arg value="${build}/__AttackAPI.js"/>
+			<arg value="${build}/AttackAPI.js"/>
 			<arg value="${doc}"/>
 		</java>
-		<delete file="${build}/__AttackAPI.js"/>
 	</target>
 
 	<target name="all" depends="sto, lib, inf"/>

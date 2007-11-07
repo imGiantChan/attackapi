@@ -2,9 +2,13 @@
 /**
  * @cat Base
  * @name AttackAPI.parseURL
- * @desc parse URL into object
+ * @desc parse URL into a object.
  * @param {String} url the url to parse
  * @return {Object} parsed url object
+ * @todo this function is a mess, someone needs to fix it
+ * @examples <pre><code>var o = AttackAPI.parseURL('http://gnucitizen.org')</code></pre>
+ * <p>results in a URL object which have the following list of properties: href, username,
+ * password, port, protocol, host, hostname, pathname, search, hash.</p>
  */
 AttackAPI.parseURL = function (url) {
 	var REGEX = /^((\w+):\/\/)?((\w+):?(\w+)?@)?([^\/\?:]+):?(\d+)?(\/?[^\?#]+)?\??([^#]+)?#?(\w*)/;

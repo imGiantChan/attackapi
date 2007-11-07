@@ -2,8 +2,11 @@
 /**
  * @cat Base
  * @name AttackAPI.encodeBase64
+ * @desc performs a base64 encoding on a string.
  * @param {String} input the string to encode
  * @return {String} base64 encoded string
+ * @examples <pre><code>var s = AttackAPI.encodeBase64('gnucitizen.org')</code></pre>
+ * <p>results in string <strong>'Z251Y2l0aXplbi5vcmc='</strong>.</p>
  */
 AttackAPI.encodeBase64 = function (input) {
 	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

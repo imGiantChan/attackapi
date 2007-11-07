@@ -1,0 +1,1 @@
+if (!AttackAPI) { /* begin */

@@ -2,8 +2,11 @@
 /**
  * @cat Base
  * @name AttackAPI.buildJSON
+ * @desc builds a JSON string from an object. The function can be used to sarialize any object into a JSON string.
  * @param {Object} o the object to be used
  * @return {String} JSON encoded object
+ * @examples <pre><code>var j = AttackAPI.buildJSON({name: 'Fred', lastName: 'Johnson'})</code></pre>
+ * <p>will serialize the JavaScript object into a JSON string.</p>
  */
 AttackAPI.buildJSON = function (o) {
 	function escapeS(str) {
@@ -16,7 +19,7 @@ AttackAPI.buildJSON = function (o) {
 	}
 
 	var type = typeof(o);
-	
+
 	if (o == undefined) {
 		return 'undefined'
 	} else if (typeof(o.toJSON) == 'function') {
@@ -25,19 +28,19 @@ AttackAPI.buildJSON = function (o) {
 		return escapeS(o);
 	} else if (o instanceof Array) {
 		var a = [];
-		
+
 		for (i = 0; i < o.length; i ++) {
-			a.push(this.buildJSON(o[i]));
+			a.push(AttackAPI.buildJSON(o[i]));
 		}
-		
+
 		return '[' + a.join(',') + ']';
 	} else if (type == 'object') {
 		var a = [];
-		
+
 		for (var i in o) {
-			a.push(escapeS(i) + ':' + this.buildJSON(o[i]));
+			a.push(escapeS(i) + ':' + AttackAPI.buildJSON(o[i]));
 		}
-		
+
 		return '{' + a.join(',') + '}';
 	} else {
 		return o.toString();
