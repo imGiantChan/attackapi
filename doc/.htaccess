@@ -1,0 +1,15 @@
+<Files .*>
+order allow,deny
+deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule ^/*$ /attackapi/index.htm [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* /attackapi/error.htm [R,L]
+</IfModule>
+
+Header set Cache-Control "no-store, no-cache, must-revalidate"
+Header set Pragma "no-cache"

@@ -1,0 +1,71 @@
+@import url(screen.base.css);
+
+#header h1 a {
+width: 355px;
+height: 70px;
+display: block;
+background: url(images/logo.png) no-repeat;
+}
+
+#header h1 a span {
+display: none;
+}
+
+body#main {
+margin-left: 20%;
+margin-right: 20%;
+text-align: center;
+}
+
+body#main #header h1 a {
+margin-left: auto;
+margin-right: auto;
+}
+
+body#main #content {
+text-align: left;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+h3 {
+font-size: 200%;
+margin-bottom: 0.2em;
+}
+
+.items {
+margin: 0;
+padding: 0;
+width: 100%;
+list-style-type: none;
+}
+
+.field-name {
+}
+
+.field-short {
+margin-top: 0.5em;
+font-style: italic;
+}
+
+.field-desc {
+margin-top: 0.5em;
+}
+
+.field-return-type {
+color: #333333; 
+border-bottom: 1px dotted;
+}
+
+.field-return-desc {
+}
+
+.field-param-name {
+color: #666666; 
+border-bottom: 1px dotted;
+}
+
+.field-param-type {
+color: #333333; 
+border-bottom: 1px dotted;
+}

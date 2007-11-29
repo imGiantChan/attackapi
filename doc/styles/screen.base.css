@@ -1,0 +1,541 @@
+/*
+ * VERSION 7.0
+ */
+
+body {
+margin: 0;
+padding: 0;
+margin: 5px;
+color: #999999;
+font: normal 101% Arial, Helvetica, sans-serif;
+background: #000000 url(images/background.png) repeat-x;
+}
+
+h1, h2, h3, h4, h5, h6 {
+margin: 0;
+padding: 0;
+font-weight: lighter;
+text-transform: uppercase;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+color: #BBB;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+text-decoration: none;
+}
+
+a {
+color: #FFFFFF;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+img {
+border: 0;
+}
+
+p {
+margin: 0;
+padding: 0;
+font-size: 75%;
+line-height: 1.5em;
+margin-bottom: 1em;
+}
+
+q {
+font-style: italic;
+}
+
+ul, ol {
+margin: 0;
+font-size: 75%;
+display: table;
+margin-bottom: 1em;
+}
+
+ul li, ol li {
+margin: 0.3em 0 0.3em 0;
+}
+
+ul li p, ol li p {
+font-size: 100%;
+}
+
+code {
+font: inherit;
+font-style: italic;
+}
+
+pre code {
+color: #000000;
+overflow: auto;
+display: block;
+max-height: 15em;
+font: 110% courier;
+padding: 15px 25px;
+margin-bottom: 1em;
+background: #FFFFFF;
+border: 10px solid #333333;
+}
+
+pre code a {
+color: #000000;
+}
+
+blockquote p {
+font-size: 100%;
+}
+
+table {
+width: 100%;
+background: #000000;
+margin-bottom: 0.5em;
+border: 1px solid #000000;
+}
+
+table tr td {
+padding: 10px;
+font-size: 75%;
+color: #000000;
+background: #FFFFFF;
+}
+
+table tr td a {
+color: #000000;
+border-bottom: 1px dotted #000000;
+}
+
+table thead tr td {
+color: #FFFFFF;
+background: #000000;
+font-weight: bolder;
+text-transform: uppercase;
+}
+
+form {
+padding: 10px;
+margin-bottom: 1em;
+border: #333333 1px solid;
+}
+
+form p {
+font-size: 100%;
+}
+
+label {
+font-size: 70%;
+}
+
+textarea, input {
+border: none;
+margin: 5px 0;
+padding: 10px;
+}
+
+select {
+padding: 0;
+margin: 5px 0;
+border: none;
+}
+
+select option {
+padding: 1em;
+}
+
+/*
+ * PRIMITIVES
+ */
+
+.cleared {
+clear: both;
+}
+
+.to-left {
+float: left ! important;
+}
+
+.to-right {
+float: right ! important;
+}
+
+.message {
+color: #000000;
+display: block;
+padding: 15px 25px;
+margin-bottom: 1em;
+background: #EED2EE;
+border: 4px solid #CD96CD;
+}
+
+.message a {
+color: #000000;
+font-weight: bolder;
+text-decoration: none;
+}
+
+.message a:hover {
+text-decoration: underline;
+}
+
+.message p {
+margin: 0;
+padding: 0;
+margin-bottom: 1em;
+}
+
+.warning {
+color:#000000;
+display: block;
+padding: 15px 25px;
+margin-bottom: 1em;
+background: #FFDFFF;
+border: 4px solid #FF4848;
+}
+
+.warning a {
+color: #000000;
+font-weight: bolder;
+text-decoration: none;
+}
+
+.warning a:hover {
+text-decoration: underline;
+}
+
+.warning p {
+margin: 0;
+padding: 0;
+margin-bottom: 1em;
+}
+
+.stress {
+font-size: 110%;
+font-style: italic;
+font-weight: lighter;
+margin-bottom: 0.5em;
+text-transform: uppercase;
+}
+
+.pane {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 300px;
+color: #FFFFFF;
+background: #000000;
+border: 1px solid #333333;
+}
+
+.preview {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 300px;
+color: #FFFFFF;
+margin-top: 0.5em;
+background: #000000;
+margin-bottom: 0.5em;
+border: 1px solid #BBB;
+}
+
+.section {
+clear: both;
+display: block;
+border-top: 1px solid #333333;
+}
+
+.box {
+padding: 2em;
+background: #000000;
+border: 5px solid #BBB;
+}
+
+.screen {
+width: auto; 
+clear: both;
+display: block;
+overflow: hidden;
+position: relative;
+margin-bottom: 10px;
+border: 10px solid #333333;
+background: #000000 url(images/background.png) repeat-x;
+}
+
+.screen img, .screen object, .screen iframe {
+float: left;
+margin: 10px;
+display: inline;
+background: #000000;
+border: 10px solid #000000;
+}
+
+.frame {
+padding: 5px;
+margin-top: 0.3em;
+margin-right: 10px;
+margin-bottom: 5px;
+border: 10px solid #333333;
+}
+
+.scaffold {
+padding: 10px;
+display: block;
+margin-bottom: 1em;
+border: #333333 1px solid;
+}
+
+.col {
+width: 31%;
+float: left;
+display: block;
+margin-right: 2%;
+}
+
+.list {
+margin: 0;
+padding: 0;
+display: block;
+padding-right: 10px;
+list-style-type: none;
+}
+
+.list li a {
+padding: 2px;
+color: #999999;
+display: block;
+border-top: 1px solid #333333;
+}
+
+.list li a:hover {
+background: #000000;
+text-decoration: none;
+}
+
+.initial-capital {
+float: left;
+clear: left;
+padding: 5px;
+margin-top: 0.3em;
+margin-right: 10px;
+margin-bottom: 5px;
+border: 10px solid #333333;
+}
+
+.tooltip {
+width: 33%;
+font-size: 80%;
+overflow: auto;
+}
+
+.tooltip h3 {
+font-weight: lighter;
+text-transform: none;
+}
+
+.menu {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 1.5em;
+font-size: 90%;
+background: #333333;
+list-style-type: none;
+}
+
+.menu li {
+float: left;
+}
+
+.menu li:hover ul {
+display: block;
+}
+
+.menu li a {
+display: block;
+color: #777777;
+line-height: 2em;
+padding-right: 3em;
+padding-left: 0.5em;
+background: #000000;
+text-decoration: none;
+}
+
+.menu li a:hover {
+color: #000000;
+background: #777777;
+}
+
+.menu li ul {
+margin: 0;
+padding: 0;
+display: none;
+position: absolute;
+list-style-type: none;
+}
+
+.menu li ul li {
+float: none;
+}
+
+.menu li ul li a {
+font-size: 120%;
+}
+
+.clearfix:after {
+height: 0; 
+clear: both; 
+content: '.'; 
+display: block; 
+visibility: hidden;
+}
+
+.clearfix {
+display: block;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+height: 1%;
+}
+
+.clearfix {
+display: block;
+}
+/* End hide from IE-mac */
+
+/*
+ * HEADER
+ */
+
+#header h1 {
+margin: 0;
+padding: 0;
+font-size: 3em;
+font-weight: lighter;
+text-transform: uppercase;
+}
+
+#header h1 {
+color: #FFFFFF;
+}
+
+#header h1 a {
+color: #FFFFFF;
+text-decoration: none;
+}
+
+#header h1 a:hover {
+text-decoration: none;
+}
+
+#header p {
+margin: 0;
+padding: 0;
+color: #FFFFFF;
+margin-bottom: 0.5em;
+}
+
+/*
+ * NAVIGATION
+ */
+
+#navigation {
+margin-top: 0.5em;
+}
+
+#navigation h2 {
+display: none;
+}
+
+#navigation ul {
+margin: 0;
+padding: 0;
+margin-bottom: 1em;
+list-style-type: none;
+}
+
+#navigation ul li {
+display: inline;
+margin-right: 1em;
+}
+
+#navigation ul li a {
+color: #777777;
+}
+
+/*
+ * CONTENT
+ */
+
+#content {
+padding: 5px;
+background: #050505 url(images/background-content.png) repeat-x;
+}
+
+/*
+ * FOOTER
+ */
+
+#footer {
+clear: both;
+font-size: 0.6em;
+padding-top: 2em;
+text-align: center;
+padding-bottom: 1em;
+text-transform: uppercase;
+}
+
+#footer p {
+font-size: 100%;
+}
+
+/*
+ * PRESENTATION
+ */
+
+#presentation {
+margin-left: 20%;
+margin-right: 20%;
+text-align: center;
+}
+
+#presentation #header h1 {
+padding-top: 30%;
+}
+
+#presentation #header h1 a {
+margin-left: auto;
+margin-right: auto;
+}
+
+#presentation p {
+line-height: 1.2em;
+}
+
+#presentation #footer {
+display: none;
+}
+
+/* <!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">	
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+		<dc:title>GNUCITIZEN</dc:title>
+		<dc:date>2007</dc:date>
+		<dc:creator><Agent><dc:title>GNUCITIZEN</dc:title></Agent></dc:creator>
+		<dc:rights><Agent><dc:title>GNUCITIZEN</dc:title></Agent></dc:rights>
+		<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text"/>
+		<dc:source rdf:resource="http://localhost/gnucitizen-group/wordpress"/>
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/">
+		<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+		<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+		<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+		<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+		<prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/>
+	</License>
+</rdf:RDF> --> */
