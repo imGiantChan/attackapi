@@ -12,8 +12,19 @@
  */
 AttackAPI.parseURL = function (url) {
 	var REGEX = /^((\w+):\/\/)?((\w+):?(\w+)?@)?([^\/\?:]+):?(\d+)?(\/?[^\?#]+)?\??([^#]+)?#?(\w*)/;
-	
-	var fields = {'href': 0, 'username' : 4, 'password' : 5, 'port' : 7, 'protocol' : 2, 'host' : 6, 'hostname' : 6, 'pathname' : 8, 'search' : 9, 'hash' : 10};
+
+	var fields = {
+		'href': 0,
+		'username': 4,
+		'password': 5,
+		'port': 7,
+		'protocol': 2,
+		'host': 6,
+		'hostname': 6,
+		'pathname': 8,
+		'search': 9,
+		'hash': 10};
+
 	var result = new Object();
 	var r = REGEX.exec(url);
 	
