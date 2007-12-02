@@ -9,4 +9,9 @@
 		var $A = AttackAPI;
 	}
 
+	/* hook on $AA */
+	if ($AA == undefined) {	
+		var $AA = AttackAPI;
+	}
+
 } /* end */
