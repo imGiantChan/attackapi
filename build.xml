@@ -1,78 +1,9 @@
 <project name="AttackAPI" default="all" basedir=".">
-	<property name="build" location="build/build"/>
-	<property name="lib" location="${build}/lib"/>
-	<property name="inf" location="${build}/inf"/>
-	<property name="sto" location="${build}"/>
-	<property name="doc" location="${build}/doc"/>
-	<property name="rhino" value="build/jar/rhino.jar"/>
+	<property name="doc.title" value="AttackAPI"/>
+	<property name="doc.caption" value="AttackAPI (attack composition framework)"/>
+	<property name="doc.home" value="http://www.gnucitizen.org/projects/attackapi"/>
 
-	<target name="init">
-		<mkdir dir="${build}"/>
-		<copy todir="${build}">
-			<fileset file="README"/>
-			<fileset file="COPYING"/>
-		</copy>
-	</target>
-
-	<target name="lib" depends="init">
-		<mkdir dir="${lib}"/>
-		<copy todir="${lib}/">
-			<fileset dir="lib/"/>
-		</copy>
-	</target>
-
-	<target name="inf" depends="init">
-		<mkdir dir="${inf}"/>
-		<copy todir="${inf}/">
-			<fileset dir="inf/"/>
-		</copy>
-	</target>
-
-	<target name="sto" depends="init">
-		<concat destfile="${build}/AttackAPI.js">
-			<fileset file="lib/core/.prefix.js"/>
-			<fileset file="lib/core/__init__.js"/>
-			<fileset dir="lib/core">
-				<exclude name=".prefix.js"/>
-				<exclude name=".suffix.js"/>
-				<exclude name="__init__.js"/>
-				<include name="*.js"/>
-			</fileset>
-			<fileset dir="lib/">
-				<exclude name="core/*.js"/>
-				<include name="**/__init__.js"/>
-			</fileset>
-			<fileset dir="lib/">
-				<exclude name="core/*.js"/>
-				<exclude name="**/__init__.js"/>
-				<include name="**/*.js"/>
-			</fileset>
-			<fileset file="lib/core/.suffix.js"/>
-		</concat>
-	</target>
-
-	<target name="doc" depends="sto">
-		<copy todir="${doc}">
-			<fileset dir="doc/"/>
-		</copy>
-		<java jar="${rhino}" fork="true">
-			<arg value="build/scr/doc.js"/>
-			<arg value="${build}/AttackAPI.js"/>
-			<arg value="${doc}"/>
-		</java>
-	</target>
-
-	<target name="all" depends="sto, lib, inf"/>
-
-	<target name="clean">
-		<delete dir="${build}"/>
-	</target>
-
-	<target name="dst" depends="clean, all">
-		<zip destfile="AttackAPI.zip" basedir="${build}"/>
-	</target>
-
-	<target name="src-dst" depends="clean">
-		<zip destfile="AttackAPI-src.zip" basedir="."/>
+	<target name="all">
+		<ant antfile="bld/build.xml"/>
 	</target>
 </project>
