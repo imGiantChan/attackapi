@@ -24,6 +24,8 @@ AttackAPI.dom.getAgent = function () {
 		return 'opera';
 	} else if (/msie/.test(agent) && !/opera/.test(agent)) {
 		return 'msie';
+	} else if (/chrome/.test(agent)) {
+		return 'chrome';
 	} else if (/mozilla/.test(agent) && !/(compatible|webkit)/.test(agent)) {
 		return 'mozilla';
 	} else {
