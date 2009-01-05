@@ -1,4 +1,8 @@
 
+/**
+ * @name AttackAPI.requestJS
+ * @desc include remote JavaScript source
+ */
 AttackAPI.requestJS = function (request) {
 	var tmr = null;
 	
