@@ -84,6 +84,9 @@ class HTTPSRequestHandler(HTTPRequestHandler):
 
 class HTTPSServer(HTTPServer):
 	def __init__(self, address, handler, pem_file):
+		# all we want from this method is to register a pem file and wrap the HTTPServer socket in SSL
+		# $ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+
 		SocketServer.BaseServer.__init__(self, address, handler)
 
 		self.pem_file = pem_file
@@ -374,7 +377,8 @@ class MitmProxyHTTPRequestHandler(ProxyHTTPRequestHandler):
 
 class MitmProxyHTTPServer(ProxyHTTPServer):
 	def __init__(self, address, handler, pem_file):
-		# all we want from this method is to handle pem files
+		# all we want from this method is to register a pem file
+		# $ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 		self.pem_file = pem_file
 
 		# the rest is the same
@@ -599,7 +603,7 @@ if __name__ == '__main__':
 	class S(SocketServer.ThreadingMixIn, SimpleObservableProxyHTTPServer):
 		pass
 
-	print 'Starging server on localhost:8080...'
+	print 'Starting server on localhost:8080...'
 
 	srv = S(('localhost', 8080), H, sys.argv[1])
 	srv.serve_forever()
