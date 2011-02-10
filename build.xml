@@ -1,9 +1,0 @@
-<project name="AttackAPI" default="all" basedir=".">
-	<property name="doc.title" value="AttackAPI"/>
-	<property name="doc.caption" value="AttackAPI (attack composition framework)"/>
-	<property name="doc.home" value="http://www.gnucitizen.org/projects/attackapi"/>
-
-	<target name="all">
-		<ant antfile="bld/build.xml"/>
-	</target>
-</project>
