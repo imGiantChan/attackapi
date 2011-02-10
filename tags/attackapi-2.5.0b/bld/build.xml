@@ -1,0 +1,82 @@
+<project name="build" default="all" basedir="../">
+	<property name="build" location="build"/>
+	<property name="lib" location="${build}/lib"/>
+	<property name="inf" location="${build}/inf"/>
+	<property name="sto" location="${build}"/>
+	<property name="doc" location="${build}/doc"/>
+
+	<property name="rhino" value="bld/jar/rhino.jar"/>
+
+	<target name="int">
+		<mkdir dir="${build}"/>
+		<copy todir="${build}">
+			<fileset file="README"/>
+			<fileset file="COPYING"/>
+		</copy>
+	</target>
+
+	<target name="inf" depends="int">
+		<mkdir dir="${inf}"/>
+		<copy todir="${inf}/">
+			<fileset dir="inf/"/>
+		</copy>
+	</target>
+
+	<target name="lib" depends="int">
+		<mkdir dir="${lib}"/>
+		<copy todir="${lib}/">
+			<fileset dir="lib/"/>
+		</copy>
+	</target>
+
+	<target name="sto" depends="int">
+		<concat destfile="${sto}/standalone.js">
+			<fileset file="lib/.prefix.js"/>
+			<fileset file="lib/__init__.js"/>
+			<fileset dir="lib/">
+				<exclude name=".prefix.js"/>
+				<exclude name=".suffix.js"/>
+				<exclude name="__init__.js"/>
+				<include name="**/__init__.js"/>
+			</fileset>
+			<fileset dir="lib/">
+				<exclude name=".prefix.js"/>
+				<exclude name=".suffix.js"/>
+				<exclude name="__init__.js"/>
+				<exclude name="**/__init__.js"/>
+				<exclude name="**/__prototype__.js"/>
+				<include name="**/*.js"/>
+			</fileset>
+			<fileset file="lib/.suffix.js"/>
+		</concat>
+		<concat destfile="${sto}/standalone.prototype.js">
+			<fileset file="lib/__prototype__.js"/>
+			<fileset dir="lib/">
+				<include name="**/__prototype__.js"/>
+				<exclude name="lib/__prototype__.js"/>
+			</fileset>
+		</concat>
+	</target>
+
+	<target name="doc" depends="sto">
+		<copy todir="${doc}">
+			<fileset dir="bld/doc/"/>
+		</copy>
+		<replace file="${doc}/api.htm">
+			<replacefilter token="@title@" value="${doc.title}"/>
+			<replacefilter token="@caption@" value="${doc.caption}"/>
+			<replacefilter token="@home@" value="${doc.home}"/>
+		</replace>
+		<java jar="${rhino}" fork="true">
+			<arg value="bld/scr/doc.js"/>
+			<arg value="${sto}/standalone.js"/>
+			<arg value="${doc}"/>
+		</java>
+	</target>
+
+	<target name="cln">
+		<delete dir="${build}"/>
+	</target>
+
+	<target name="all" depends="inf, lib, sto, doc"/>
+</project>
